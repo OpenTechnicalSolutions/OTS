@@ -10,7 +10,7 @@ namespace OpenTicketSystem.Models
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+            //stuff
         }
 
         public DbSet<TicketModel> Tickets { get; set; }
