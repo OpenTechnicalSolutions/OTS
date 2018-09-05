@@ -28,7 +28,8 @@ namespace BethanysPieShop
             //register framework services
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-           services.AddTransient<IPieRepository, PieRepository>();
+            services.AddTransient<IPieRepository, PieRepository>();
+            services.AddTransient<IFeedbackRepository, FeedbackRespository>();
             services.AddMvc();
         }
 
