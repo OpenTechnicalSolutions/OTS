@@ -5,8 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180905173017_initial.cs" />
+    <Compile Remove="Migrations\20180905173017_initial.Designer.cs" />
+    <Compile Remove="Migrations\20180905174208_feedback.cs" />
+    <Compile Remove="Migrations\20180905174208_feedback.Designer.cs" />
+    <Compile Remove="Migrations\20180905220810_update.cs" />
+    <Compile Remove="Migrations\20180905220810_update.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Account\Register.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>
