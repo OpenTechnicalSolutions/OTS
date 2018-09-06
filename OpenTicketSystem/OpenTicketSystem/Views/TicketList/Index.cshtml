@@ -1,0 +1,19 @@
+﻿@model IEnumerable<TicketPreviewViewModel>
+
+@{
+    ViewData["Title"] = "Global Ticket Queue";
+}
+<div>
+    <ul>
+        @foreach (var ticket in Model)
+        {
+            <li>
+                <a asp-controller="TicketList" asp-action="TicketDetails" asp-route-id="@ticket.TicketId">
+                    <div>
+                        <div>@ticket.TicketId</div><div>@ticket.</div><div>@ticket.Subject</div>
+                    </div>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
