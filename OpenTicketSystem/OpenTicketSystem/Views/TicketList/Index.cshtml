@@ -8,7 +8,7 @@
         @foreach (var ticket in Model)
         {
             <li>
-                <a asp-controller="TicketList" asp-action="TicketDetails" asp-route-id="@ticket.TicketId">
+                <a asp-controller="TicketList" asp-action="Ticket" asp-route-id="@ticket.TicketId">
                     <div>
                         <div>@ticket.TicketId</div><div>@ticket.</div><div>@ticket.Subject</div>
                     </div>

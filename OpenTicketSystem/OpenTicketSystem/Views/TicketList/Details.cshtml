@@ -1,0 +1,28 @@
+﻿@model TicketModel
+
+@{ 
+    ViewData["Title"] = "Ticket Details";
+}
+
+<div>
+    <div>@Model.Id</div>
+    <div>Customer: @Model.CustomerUserId</div>
+    <div>Technician: @Model.TechnicianUserId</div>
+    <div>
+        <div>@Model.TimeStamp</div>
+        <div>@Model.Subject</div>
+        <div>@Model.Body</div>
+        <div>
+            @foreach(var c in Model.Comments)
+            {
+                <div>
+                    <div>@c.TimeStamp</div>
+                    <div>@c.PublisherUserId</div>
+                    <div>@c.Comment</div>
+                    <div>@c.PublicFacing</div>
+                    <div>@c.EmailSent</div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

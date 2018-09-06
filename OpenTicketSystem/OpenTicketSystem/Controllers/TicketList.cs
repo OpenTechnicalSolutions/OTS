@@ -31,7 +31,7 @@ namespace OpenTicketSystem.Controllers
             return View(ticketViewModelList);
         }
 
-        public IActionResult TicketDetails(int id)
+        public IActionResult Details(int id)
         {
             var ticket = _ticketRepository.GetTicketById(id);
             return View(ticket);
