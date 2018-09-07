@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Models;
 using OpenTicketSystem.ViewModels;
 using System;
@@ -19,7 +20,8 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult Index()
         {
-            var tickets = _ticketRepository.GetTickets();
+            ViewBag.Title = "Tickets";
+            var tickets = _ticketRepository.GetTickets().OrderByDescending(d => d.TimeStamp);
             var ticketViewModelList = new List<TicketPreviewViewModel>();
             foreach (var t in tickets)
                 ticketViewModelList.Add(new TicketPreviewViewModel()
@@ -31,10 +33,33 @@ namespace OpenTicketSystem.Controllers
             return View(ticketViewModelList);
         }
 
+        public IActionResult MyTickets()
+        {
+            return View();
+        }
+
         public IActionResult Details(int id)
         {
+            ViewBag.Title = "Ticket Details";
             var ticket = _ticketRepository.GetTicketById(id);
             return View(ticket);
+        }
+
+        public IActionResult NewTicket()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewTicket(TicketModel ticketModel)
+        {
+            if(ModelState.IsValid)
+            {
+                _ticketRepository.Add(ticketModel);
+                return RedirectToAction("Details", ticketModel.Id);
+            }
+            return View(ticketModel);
+            
         }
     }
 }

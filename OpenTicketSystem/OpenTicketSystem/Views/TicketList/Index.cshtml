@@ -3,17 +3,17 @@
 @{
     ViewData["Title"] = "Global Ticket Queue";
 }
-<div>
-    <ul>
-        @foreach (var ticket in Model)
-        {
-            <li>
-                <a asp-controller="TicketList" asp-action="Ticket" asp-route-id="@ticket.TicketId">
-                    <div>
-                        <div>@ticket.TicketId</div><div>@ticket.</div><div>@ticket.Subject</div>
-                    </div>
-                </a>
-            </li>
-        }
-    </ul>
+
+<div class="container-fluid">
+    @foreach (var ticket in Model)
+    {
+        <a asp-controller="TicketList" asp-action="Ticket" asp-route-id="@ticket.TicketId">
+            <div class="row">
+                <div class="col">@ticket.TicketId</div>
+                <div class="col">@ticket.TimeStamp</div>
+                <div class="col-sm">@ticket.Subject</div>
+            </div>
+        </a>
+    }
 </div>
+

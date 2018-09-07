@@ -10,5 +10,9 @@ namespace OpenTicketSystem.Models
         IEnumerable<TicketModel> GetTickets();
 
         TicketModel GetTicketById(int id);
+
+        void Add(TicketModel ticketModel);
+
+        void Delete(int id);
     }
 }

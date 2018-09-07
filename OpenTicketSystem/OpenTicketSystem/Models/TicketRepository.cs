@@ -24,5 +24,16 @@ namespace OpenTicketSystem.Models
         {
             return _appDbContext.Tickets;
         }
+
+        public void Add(TicketModel ticketModel)
+        {
+            _appDbContext.Tickets.Add(ticketModel);
+            _appDbContext.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            _appDbContext.Tickets.Remove(GetTicketById(id));
+        }
     }
 }
