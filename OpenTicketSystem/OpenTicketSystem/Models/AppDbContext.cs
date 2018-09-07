@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OpenTicketSystem.Models.Tickets;
 using System;
 using System.Collections.Generic;
 using System.Linq;

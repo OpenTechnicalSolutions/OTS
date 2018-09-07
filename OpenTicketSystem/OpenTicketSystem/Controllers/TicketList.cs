@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using OpenTicketSystem.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.Models.Tickets;
+using OpenTicketSystem.Repositories;
 using OpenTicketSystem.ViewModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Controllers
 {

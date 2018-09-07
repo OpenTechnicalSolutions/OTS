@@ -1,10 +1,12 @@
-﻿using System;
+﻿using OpenTicketSystem.Models;
+using OpenTicketSystem.Models.Tickets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Models
-{
+namespace OpenTicketSystem.Repositories
+{ 
     public interface ITicketRepository
     {
         IEnumerable<TicketModel> GetTickets();

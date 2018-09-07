@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Models
+namespace OpenTicketSystem.Models.Tickets
 {
     public class CommentModel
     {
