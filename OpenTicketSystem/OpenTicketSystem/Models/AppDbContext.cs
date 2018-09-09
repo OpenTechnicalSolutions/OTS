@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OpenTicketSystem.Models.Tickets;
+using OpenTicketSystem.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<AppIdentityUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -17,5 +18,7 @@ namespace OpenTicketSystem.Models
         }
 
         public DbSet<TicketModel> Tickets { get; set; }
+        public DbSet<DepartmentModel> Departments { get; set; }
+        public DbSet<SubDepartmentModel> SubDepartments { get; set; }
     }
 }

@@ -11,9 +11,10 @@ using System;
 namespace OpenTicketSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180909061906_newappidentity3")]
+    partial class newappidentity3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,38 +228,6 @@ namespace OpenTicketSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.DepartmentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubDepartmentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("DepartmentModelId");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentModelId");
-
-                    b.ToTable("SubDepartments");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -309,13 +278,6 @@ namespace OpenTicketSystem.Migrations
                     b.HasOne("OpenTicketSystem.Models.Tickets.TicketModel")
                         .WithMany("Comments")
                         .HasForeignKey("TicketModelId");
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubDepartmentModel", b =>
-                {
-                    b.HasOne("OpenTicketSystem.Models.Users.DepartmentModel")
-                        .WithMany("SubDepartments")
-                        .HasForeignKey("DepartmentModelId");
                 });
 #pragma warning restore 612, 618
         }
