@@ -190,6 +190,8 @@ namespace OpenTicketSystem.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<int?>("DepartmentId");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -243,6 +245,20 @@ namespace OpenTicketSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("OpenTicketSystem.Models.Users.DepartmentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>
                 {
                     b.Property<int>("Id")
@@ -252,11 +268,9 @@ namespace OpenTicketSystem.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("TechnicalGroupId");
+                    b.Property<int>("TechincalGroupId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TechnicalGroupId");
 
                     b.ToTable("SubTechnicalGroup");
                 });
@@ -318,13 +332,6 @@ namespace OpenTicketSystem.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>
-                {
-                    b.HasOne("OpenTicketSystem.Models.Users.TechnicalGroup")
-                        .WithMany("SubDepartments")
-                        .HasForeignKey("TechnicalGroupId");
                 });
 #pragma warning restore 612, 618
         }
