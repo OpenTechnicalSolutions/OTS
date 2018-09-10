@@ -23,5 +23,6 @@ namespace OpenTicketSystem.Models
         public DbSet<SubTechnicalGroup> SubTechnicalGroup { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<DepartmentModel> Departments { get; set; }
     }
 }

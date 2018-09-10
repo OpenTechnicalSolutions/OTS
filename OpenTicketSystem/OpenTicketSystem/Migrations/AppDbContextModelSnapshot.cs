@@ -147,43 +147,17 @@ namespace OpenTicketSystem.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BuildingId");
+                    b.Property<int>("BuildingId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("PrimaryContactUserName");
+                    b.Property<int>("PrimaryContactUserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BuildingId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Tickets.CommentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Comment");
-
-                    b.Property<bool>("EmailSent");
-
-                    b.Property<bool>("PublicFacing");
-
-                    b.Property<int>("PublisherUserId");
-
-                    b.Property<int?>("TicketModelId");
-
-                    b.Property<DateTime>("TimeStamp");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TicketModelId");
-
-                    b.ToTable("CommentModel");
                 });
 
             modelBuilder.Entity("OpenTicketSystem.Models.Tickets.TicketModel", b =>
@@ -216,8 +190,6 @@ namespace OpenTicketSystem.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<int?>("DepartmentId");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -249,7 +221,9 @@ namespace OpenTicketSystem.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<int?>("SubDepartmentId");
+                    b.Property<int?>("SubTechnicalGroupId");
+
+                    b.Property<int?>("TechnicalGroupId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -344,20 +318,6 @@ namespace OpenTicketSystem.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Locations.Room", b =>
-                {
-                    b.HasOne("OpenTicketSystem.Models.Locations.Building")
-                        .WithMany("Rooms")
-                        .HasForeignKey("BuildingId");
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Tickets.CommentModel", b =>
-                {
-                    b.HasOne("OpenTicketSystem.Models.Tickets.TicketModel")
-                        .WithMany("Comments")
-                        .HasForeignKey("TicketModelId");
                 });
 
             modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>

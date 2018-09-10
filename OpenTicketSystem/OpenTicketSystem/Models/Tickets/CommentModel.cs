@@ -8,6 +8,7 @@ namespace OpenTicketSystem.Models.Tickets
     public class CommentModel
     {
         public int Id { get; set; }
+        public int TicketId { get; set; }
         public int PublisherUserId { get; set; }
         public DateTime TimeStamp { get; set; }
         public string Comment { get; set; }

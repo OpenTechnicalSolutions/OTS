@@ -9,13 +9,13 @@ using OpenTicketSystem.ViewModels;
 
 namespace OpenTicketSystem.Controllers
 {
-    public class AccountAdministrationController : Controller
+    public class AccountAdministration : Controller
     {
         public SignInManager<AppIdentityUser> _signInManager;
         public UserManager<AppIdentityUser> _userManager;
         public RoleManager<AppIdentityUser> _roleManager;
 
-        public AccountAdministrationController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager)
+        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -39,6 +39,11 @@ namespace OpenTicketSystem.Controllers
             }
 
             return View(userPreviewDetails);
+        }
+
+        public IActionResult CreateUser()
+        {
+            return View();
         }
     }
 }
