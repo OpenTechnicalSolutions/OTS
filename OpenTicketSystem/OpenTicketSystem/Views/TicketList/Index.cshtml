@@ -3,7 +3,9 @@
 @{
     ViewData["Title"] = "Global Ticket Queue";
 }
-
+<a asp-controller="TicketList" asp-action="NewTicket" class="nav navbar-nav">
+    New Ticket
+</a>
 <div class="container-fluid">
     @foreach (var ticket in Model)
     {

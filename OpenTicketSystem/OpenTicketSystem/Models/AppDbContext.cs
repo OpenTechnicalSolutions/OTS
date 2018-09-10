@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
 using System;
@@ -20,5 +21,7 @@ namespace OpenTicketSystem.Models
         public DbSet<TicketModel> Tickets { get; set; }
         public DbSet<DepartmentModel> Departments { get; set; }
         public DbSet<SubDepartmentModel> SubDepartments { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
     }
 }

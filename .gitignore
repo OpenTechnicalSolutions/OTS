@@ -266,3 +266,7 @@ __pycache__/
 /BethanysPieShop/BethanysPieShop/Migrations/20180905222124_IdentityAdded.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180907034158_CustomerUsers.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180907034158_CustomerUsers.Designer.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180909222725_addedBuildingsData.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180909222725_addedBuildingsData.Designer.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180910024410_buildings.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180910024410_buildings.Designer.cs

@@ -128,6 +128,40 @@ namespace OpenTicketSystem.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("OpenTicketSystem.Models.Locations.Building", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Buildings");
+                });
+
+            modelBuilder.Entity("OpenTicketSystem.Models.Locations.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("BuildingId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("PrimaryContactUserName");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildingId");
+
+                    b.ToTable("Rooms");
+                });
+
             modelBuilder.Entity("OpenTicketSystem.Models.Tickets.CommentModel", b =>
                 {
                     b.Property<int>("Id")
@@ -198,6 +232,10 @@ namespace OpenTicketSystem.Migrations
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
+
+                    b.Property<int?>("OfficeBuildingId");
+
+                    b.Property<int?>("OfficeRoomId");
 
                     b.Property<string>("PasswordHash");
 
@@ -302,6 +340,13 @@ namespace OpenTicketSystem.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OpenTicketSystem.Models.Locations.Room", b =>
+                {
+                    b.HasOne("OpenTicketSystem.Models.Locations.Building")
+                        .WithMany("Rooms")
+                        .HasForeignKey("BuildingId");
                 });
 
             modelBuilder.Entity("OpenTicketSystem.Models.Tickets.CommentModel", b =>

@@ -16,5 +16,10 @@ namespace OpenTicketSystem.Models.Tickets
         public string Body { get; set; }
 
         public List<CommentModel> Comments { get; set; }
+
+        public TicketModel()
+        {
+            TimeStamp = DateTime.Now;
+        }
     }
 }
