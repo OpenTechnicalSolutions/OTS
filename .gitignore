@@ -270,3 +270,5 @@ __pycache__/
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180909222725_addedBuildingsData.Designer.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180910024410_buildings.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180910024410_buildings.Designer.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180910033409_initial.cs
+/OpenTicketSystem/OpenTicketSystem/Migrations/20180910033409_initial.Designer.cs

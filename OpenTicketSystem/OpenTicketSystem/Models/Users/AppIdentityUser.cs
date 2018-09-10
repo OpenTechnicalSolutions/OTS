@@ -13,7 +13,7 @@ namespace OpenTicketSystem.Models.Users
         public string LastName { get; set; }
         public int? OfficeBuildingId { get; set; }
         public int? OfficeRoomId { get; set; }
-        public int? DepartmentId { get; set; }
-        public int? SubDepartmentId { get; set; }
+        public int? TechnicalGroupId { get; set; }
+        public int? SubTechnicalGroupId { get; set; }
     }
 }

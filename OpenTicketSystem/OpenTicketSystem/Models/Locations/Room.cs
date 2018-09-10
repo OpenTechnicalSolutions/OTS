@@ -10,6 +10,6 @@ namespace OpenTicketSystem.Models.Locations
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int PrimaryContactUserName { get; set; }
+        public int PrimaryContactUserId { get; set; }
     }
 }

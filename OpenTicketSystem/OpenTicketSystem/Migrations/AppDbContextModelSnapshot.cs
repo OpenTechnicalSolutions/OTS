@@ -223,6 +223,10 @@ namespace OpenTicketSystem.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -265,7 +269,7 @@ namespace OpenTicketSystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.DepartmentModel", b =>
+            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -274,17 +278,19 @@ namespace OpenTicketSystem.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("TechnicalGroupId");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.HasIndex("TechnicalGroupId");
+
+                    b.ToTable("SubTechnicalGroup");
                 });
 
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubDepartmentModel", b =>
+            modelBuilder.Entity("OpenTicketSystem.Models.Users.TechnicalGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("DepartmentModelId");
 
                     b.Property<string>("Description");
 
@@ -292,9 +298,7 @@ namespace OpenTicketSystem.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentModelId");
-
-                    b.ToTable("SubDepartments");
+                    b.ToTable("TechnicalGroup");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -356,11 +360,11 @@ namespace OpenTicketSystem.Migrations
                         .HasForeignKey("TicketModelId");
                 });
 
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubDepartmentModel", b =>
+            modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>
                 {
-                    b.HasOne("OpenTicketSystem.Models.Users.DepartmentModel")
+                    b.HasOne("OpenTicketSystem.Models.Users.TechnicalGroup")
                         .WithMany("SubDepartments")
-                        .HasForeignKey("DepartmentModelId");
+                        .HasForeignKey("TechnicalGroupId");
                 });
 #pragma warning restore 612, 618
         }

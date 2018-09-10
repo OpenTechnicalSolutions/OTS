@@ -15,7 +15,7 @@ namespace OpenTicketSystem.Models.Tickets
         public string Subject { get; set; }
         public string Body { get; set; }
 
-        public List<CommentModel> Comments { get; set; }
+        public CommentModel[] Comments { get; set; }
 
         public TicketModel()
         {

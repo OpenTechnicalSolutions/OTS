@@ -30,6 +30,7 @@ namespace OpenTicketSystem.Controllers
             {
                 userPreviewDetails.Add(new UserPreviewDetailsViewModel
                 {
+                    ProfileId = u.Id,
                     FirstName = u.FirstName,
                     LastName = u.LastName,
                     Email = u.Email,
