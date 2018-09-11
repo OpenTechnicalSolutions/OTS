@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Repositories
 { 
-    public class TicketRepository : ITicketRepository
+    public class TicketRepository : IRepository<TicketModel>
     {
 
         private AppDbContext _appDbContext { get; set; }
@@ -15,16 +15,6 @@ namespace OpenTicketSystem.Repositories
         public TicketRepository(AppDbContext dbContext)
         {
             _appDbContext = dbContext;
-        }
-
-        public TicketModel GetTicketById(int id)
-        {
-            return _appDbContext.Tickets.FirstOrDefault(p => p.Id == id);
-        }
-
-        public IEnumerable<TicketModel> GetTickets()
-        {
-            return _appDbContext.Tickets;
         }
 
         public void Add(TicketModel ticketModel)
@@ -35,7 +25,23 @@ namespace OpenTicketSystem.Repositories
 
         public void Delete(int id)
         {
-            _appDbContext.Tickets.Remove(GetTicketById(id));
+            Delete(GetById(id));
+        }
+
+        public IEnumerable<TicketModel> GetAll()
+        {
+            return _appDbContext.Tickets;
+        }
+
+        public TicketModel GetById(int id)
+        {
+            return _appDbContext.Tickets.FirstOrDefault(p => p.Id == id);
+        }
+
+        public void Delete(TicketModel deleteObject)
+        {
+            _appDbContext.Tickets.Remove(deleteObject);
+            _appDbContext.SaveChanges();
         }
     }
 }

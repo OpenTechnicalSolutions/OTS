@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Models.Users
+namespace OpenTicketSystem.Models.Locations
 {
     public class DepartmentModel
     {

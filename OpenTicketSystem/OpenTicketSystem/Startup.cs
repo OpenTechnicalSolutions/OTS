@@ -34,7 +34,7 @@ namespace OpenTicketSystem
 
             services.AddIdentity<AppIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddTransient<ITicketRepository, TicketRepository>();
+            //services.AddTransient<ITicketRepository, TicketRepository>();
             services.AddMvc();
         }
 

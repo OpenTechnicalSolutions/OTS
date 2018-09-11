@@ -9,9 +9,9 @@ namespace OpenTicketSystem.Controllers
 {
     public class TicketList : Controller
     {
-        private readonly ITicketRepository _ticketRepository;
+        private readonly TicketRepository _ticketRepository;
 
-        public TicketList(ITicketRepository ticketRepository)
+        public TicketList(TicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
@@ -19,7 +19,7 @@ namespace OpenTicketSystem.Controllers
         public IActionResult Index()
         {
             ViewBag.Title = "Tickets";
-            var tickets = _ticketRepository.GetTickets().OrderByDescending(d => d.TimeStamp);
+            var tickets = _ticketRepository.GetAll().OrderByDescending(d => d.TimeStamp);
             var ticketViewModelList = new List<TicketPreviewViewModel>();
             foreach (var t in tickets)
                 ticketViewModelList.Add(new TicketPreviewViewModel()
@@ -39,7 +39,7 @@ namespace OpenTicketSystem.Controllers
         public IActionResult Details(int id)
         {
             ViewBag.Title = "Ticket Details";
-            var ticket = _ticketRepository.GetTicketById(id);
+            var ticket = _ticketRepository.GetById(id);
             return View(ticket);
         }
 

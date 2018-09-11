@@ -9,7 +9,7 @@ namespace OpenTicketSystem.Repositories
     {
         IEnumerable<T> GetAll();
 
-        T GetById();
+        T GetById(int id);
 
         void Add(T addObject);
 
