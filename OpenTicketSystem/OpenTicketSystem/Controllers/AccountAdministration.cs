@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Users;
 using OpenTicketSystem.ViewModels;
 
@@ -11,9 +12,11 @@ namespace OpenTicketSystem.Controllers
 {
     public class AccountAdministration : Controller
     {
-        public SignInManager<AppIdentityUser> _signInManager;
-        public UserManager<AppIdentityUser> _userManager;
-        public RoleManager<AppIdentityUser> _roleManager;
+        private SignInManager<AppIdentityUser> _signInManager;
+        private UserManager<AppIdentityUser> _userManager;
+        private RoleManager<AppIdentityUser> _roleManager;
+
+        private AppDbContext _dbContext;
 
         public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager)
         {
@@ -43,6 +46,9 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult CreateUser()
         {
+            ViewBag.Departments = _dbContext.Departments;
+            ViewBag.TechnicalGroup = _dbContext.TechnicalGroup;
+
             return View();
         }
     }
