@@ -42,5 +42,12 @@ namespace OpenTicketSystem.Repositories
         {
             return _dbContext.Rooms.FirstOrDefault(r => r.Id == id);
         }
+
+        public void Update(Room obj)
+        {
+            var entity = _dbContext.Rooms.FirstOrDefault(b => b.Id == obj.Id);
+            if (entity != null)
+                _dbContext.Rooms.Update(entity);
+        }
     }
 }

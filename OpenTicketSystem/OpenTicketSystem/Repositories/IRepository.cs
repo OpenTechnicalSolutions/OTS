@@ -16,5 +16,7 @@ namespace OpenTicketSystem.Repositories
         void Delete(T deleteObject);
 
         void Delete(int objId);
+
+        void Update(T obj);
     }
 }

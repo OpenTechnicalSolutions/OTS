@@ -43,5 +43,10 @@ namespace OpenTicketSystem.Repositories
             _appDbContext.Tickets.Remove(deleteObject);
             _appDbContext.SaveChanges();
         }
+
+        public void Update(TicketModel obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

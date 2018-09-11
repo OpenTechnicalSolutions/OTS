@@ -14,5 +14,10 @@ namespace OpenTicketSystem.Models.Tickets
         public string Comment { get; set; }
         public bool PublicFacing { get; set; }
         public bool EmailSent { get; set; }
+
+        public CommentModel()
+        {
+            TimeStamp = DateTime.Now;
+        }
     }
 }

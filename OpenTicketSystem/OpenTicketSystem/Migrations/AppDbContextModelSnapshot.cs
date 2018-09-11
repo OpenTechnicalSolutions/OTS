@@ -142,6 +142,20 @@ namespace OpenTicketSystem.Migrations
                     b.ToTable("Buildings");
                 });
 
+            modelBuilder.Entity("OpenTicketSystem.Models.Locations.DepartmentModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
+
             modelBuilder.Entity("OpenTicketSystem.Models.Locations.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -243,20 +257,6 @@ namespace OpenTicketSystem.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("OpenTicketSystem.Models.Users.DepartmentModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("OpenTicketSystem.Models.Users.SubTechnicalGroup", b =>
