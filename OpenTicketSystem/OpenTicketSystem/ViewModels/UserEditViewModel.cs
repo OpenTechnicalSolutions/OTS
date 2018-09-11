@@ -14,7 +14,7 @@ namespace OpenTicketSystem.ViewModels
         public int DepartmentId { get; set; }
         public int OfficeBuildingId { get; set; }
         public int OfficeRoomId { get; set; }
-        public int TechnincalGroupId { get; set; }
+        public int TechnicalGroupId { get; set; }
         public int SubTechnicalGroupId { get; set; }
     }
 }

@@ -18,11 +18,12 @@ namespace OpenTicketSystem.Controllers
 
         private AppDbContext _dbContext;
 
-        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager)
+        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager, AppDbContext dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _dbContext = dbContext;
         }
 
         public IActionResult Index()
@@ -48,6 +49,9 @@ namespace OpenTicketSystem.Controllers
         {
             ViewBag.Departments = _dbContext.Departments;
             ViewBag.TechnicalGroup = _dbContext.TechnicalGroup;
+            ViewBag.SubTechnicalGroup = _dbContext.SubTechnicalGroup;
+            ViewBag.Buildings = _dbContext.Buildings;
+            ViewBag.Rooms = _dbContext.Rooms;
 
             return View();
         }
