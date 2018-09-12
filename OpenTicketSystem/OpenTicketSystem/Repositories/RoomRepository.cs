@@ -49,5 +49,10 @@ namespace OpenTicketSystem.Repositories
             if (entity != null)
                 _dbContext.Rooms.Update(entity);
         }
+
+        public IEnumerable<Room> GetBuildingRooms(int buildingId)
+        {
+            return _dbContext.Rooms.Where(r => r.BuildingId == buildingId);
+        }
     }
 }

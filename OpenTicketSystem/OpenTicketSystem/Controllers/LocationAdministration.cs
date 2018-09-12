@@ -89,6 +89,7 @@ namespace OpenTicketSystem.Controllers
         }
         public IActionResult BuildingDetails (int buildingId)
         {
+            ViewBag.Rooms = _roomRepo.GetBuildingRooms(buildingId);
             return View(_buildingRepo.GetById(buildingId));
         }
         public IActionResult EditBuilding(int BuildingId)
