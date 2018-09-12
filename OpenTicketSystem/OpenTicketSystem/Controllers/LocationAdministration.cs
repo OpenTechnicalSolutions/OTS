@@ -24,7 +24,7 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Departments");
         }
 
         public IActionResult Departments()
