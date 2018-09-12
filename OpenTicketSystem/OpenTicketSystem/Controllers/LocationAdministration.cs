@@ -32,8 +32,39 @@ namespace OpenTicketSystem.Controllers
             var departments = _departmentRepo.GetAll();
             return View(departments);
         }
+        public IActionResult AddDepartment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddDepartment(DepartmentModel departmentModel)
+        {
+            if(ModelState.IsValid)
+            {
+                _departmentRepo.Add(departmentModel);
+                return RedirectToAction("Departments");
+            }
 
-
+            return View(departmentModel);
+        }
+        public IActionResult DepartmentDetails(int deptId)
+        {
+            return View(_departmentRepo.GetById(deptId));
+        }
+        public IActionResult EditDepartment(int deptId)
+        {
+            return View(_departmentRepo.GetById(deptId));
+        }
+        [HttpPost]
+        public IActionResult EditDepartment(DepartmentModel deptModel)
+        {
+            if(ModelState.IsValid)
+            {
+                _departmentRepo.Update(deptModel);
+                return RedirectToAction("Departments");
+            }
+            return View(deptModel);
+        }
 
 
         //Buildings
@@ -56,6 +87,10 @@ namespace OpenTicketSystem.Controllers
             }
             return View(building);
         }
+        public IActionResult BuildingDetails (int buildingId)
+        {
+            return View(_buildingRepo.GetById(buildingId));
+        }
         public IActionResult EditBuilding(int BuildingId)
         {
             return View(_buildingRepo.GetById(BuildingId));
@@ -66,7 +101,7 @@ namespace OpenTicketSystem.Controllers
             if(ModelState.IsValid)
             {
                 _buildingRepo.Update(building);
-                return RedirectToAction("")
+                return RedirectToAction("BuildingDetails", building.Id);
             }
             return View(building);
         }
@@ -88,22 +123,27 @@ namespace OpenTicketSystem.Controllers
             if (ModelState.IsValid)
             {
                 _roomRepo.Add(room);
-                return RedirectToAction("");
+                return RedirectToAction("BuildingDetails", room.BuildingId);
             }
             return View(room);
+        }
+        public IActionResult RoomDetails(int roomId)
+        {
+            return View(_roomRepo.GetById(roomId));
         }
         public IActionResult EditRoom(int roomId)
         {
             return View(_roomRepo.GetById(roomId));
         }
-
+        [HttpPost]
         public IActionResult EditRoom(Room room)
         {
             if(ModelState.IsValid)
             {
                 _roomRepo.Update(room);
-                RedirectToAction("")
+                return RedirectToAction("RoomDetails", room.Id);
             }
+            return View(room);
         }
     }
 }
