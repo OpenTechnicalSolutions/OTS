@@ -8,8 +8,11 @@ namespace OpenTicketSystem.Models.Tickets
     public class TicketModel
     {
         public int Id { get; set; }
-        public int CustomerUserId { get; set; }
-        public int TechnicianUserId { get; set; }
+        public string CustomerUserId { get; set; }
+        public string TechnicianUserId { get; set; }
+
+        public int TechnicalGroupId { get; set; }
+        public int SubTechnicalGroupId { get; set; }
 
         public DateTime TimeStamp { get; set; }
         public string Subject { get; set; }
@@ -17,7 +20,7 @@ namespace OpenTicketSystem.Models.Tickets
 
         public TicketModel()
         {
-            TimeStamp = DateTime.Now;
+            
         }
     }
 }

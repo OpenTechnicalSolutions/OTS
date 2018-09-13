@@ -17,7 +17,7 @@ namespace OpenTicketSystem.Models.Tickets
 
         public CommentModel()
         {
-            TimeStamp = DateTime.Now;
+           
         }
     }
 }
