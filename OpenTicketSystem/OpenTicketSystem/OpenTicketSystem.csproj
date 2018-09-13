@@ -13,13 +13,4 @@
     <Folder Include="wwwroot\Content\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Migrations\New folder\CommandConsole-master\CommandConsole\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Migrations\New folder\CommandConsole-master\CommandConsole\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-  </ItemGroup>
-
 </Project>
