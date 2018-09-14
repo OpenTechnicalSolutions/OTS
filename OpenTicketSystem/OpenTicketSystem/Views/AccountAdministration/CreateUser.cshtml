@@ -1,6 +1,7 @@
 ﻿@model UserEditViewModel;
+
 @{
-    ViewData["Title"] = "CreateUser";
+    ViewData["Title"] = "Create User";
 }
 
 <h2>CreateUser</h2>
@@ -52,13 +53,20 @@
     </div>
 
     <div class="form-group">
+        <label asp-for="RoleId" class="form-control"></label>
+        <div class="col-md-10">
+            <select asp-for="RoleId" asp-items="@AppRoleManager.Roles.Select(x => new SelectListItem { Text = x.Name, Value = x.Id }).ToList()"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label asp-for="TechnicalGroupId" class="form-control"></label>
         <div class="col-md-10">
             <select asp-for="TechnicalGroupId" asp-items="@ViewBag.TechnicalGroup"></select>
         </div>
         <label asp-for="SubTechnicalGroupId" class="form-control"></label>
         <div>
-            <select asp-for="SubTechnicalGroupId" asp-items="@ViewBag.SubTechnicalGroup"></select>
+            <select asp-for="SubTechnicalGroupId" asp-items="@ViewBag.SubTechnicalGroup.Select(x => new SelectListItem { Text = x.Name, Value = x.Id }.ToList()"></select>
         </div>
     </div>
 </form>

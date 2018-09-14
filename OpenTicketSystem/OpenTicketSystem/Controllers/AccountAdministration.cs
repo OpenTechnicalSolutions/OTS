@@ -14,11 +14,11 @@ namespace OpenTicketSystem.Controllers
     {
         private SignInManager<AppIdentityUser> _signInManager;
         private UserManager<AppIdentityUser> _userManager;
-        private RoleManager<AppIdentityUser> _roleManager;
+        private RoleManager<IdentityRole> _roleManager;
 
         private AppDbContext _dbContext;
 
-        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<AppIdentityUser> roleManager, AppDbContext dbContext)
+        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager, AppDbContext dbContext)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -41,17 +41,16 @@ namespace OpenTicketSystem.Controllers
                     PhoneNumber = u.PhoneNumber
                 });
             }
-
             return View(userPreviewDetails);
         }
 
         public IActionResult CreateUser()
         {
-            ViewBag.Departments = _dbContext.Departments;
-            ViewBag.TechnicalGroup = _dbContext.TechnicalGroup;
-            ViewBag.SubTechnicalGroup = _dbContext.SubTechnicalGroup;
-            ViewBag.Buildings = _dbContext.Buildings;
-            ViewBag.Rooms = _dbContext.Rooms;
+            var editUserViewModel = new UserEditViewModel
+            {
+                Roles = _roleManager.Roles.ToList(),
+                TechnicalGroups = _dbContext.TechnicalGroups.G
+            }
 
             return View();
         }
