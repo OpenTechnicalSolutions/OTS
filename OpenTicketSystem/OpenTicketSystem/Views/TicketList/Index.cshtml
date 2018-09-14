@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TicketPreviewViewModel>
+﻿@model TicketQueueViewModel
 
 @{
     ViewData["Title"] = "Global Ticket Queue";
@@ -6,16 +6,31 @@
 <a asp-controller="TicketList" asp-action="NewTicket" class="nav navbar-nav">
     New Ticket
 </a>
-<div class="container-fluid">
-    @foreach (var ticket in Model)
-    {
-        <a asp-controller="TicketList" asp-action="Ticket" asp-route-id="@ticket.TicketId">
-            <div class="row">
-                <div class="col">@ticket.TicketId</div>
-                <div class="col">@ticket.TimeStamp</div>
-                <div class="col-sm">@ticket.Subject</div>
-            </div>
-        </a>
-    }
-</div>
+<button class="btn btn-primary" asp-action="NewTicket">New Ticket</button>
+@foreach (var m in Model)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Time Stamp</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in m)
+            {
+                <tr>
+                    <th scope="row">@t.Id</th>
+                    <td>@t.TimeStamp</td>
+                    <td>@t.Subject</td>
+                    <td>@t.Status.ToString()</td>
+                    <td><button class="btn btn-primary" type="button" asp-action="TicketDetails" asp-route-id="@t.Id"></button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 

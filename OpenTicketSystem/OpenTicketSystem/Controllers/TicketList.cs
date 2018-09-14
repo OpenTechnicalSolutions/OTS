@@ -50,7 +50,6 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult Details(int id)
         {
-            ViewBag.Title = "Ticket Details";
             var ticket = _ticketRepository.GetById(id);
             return View(ticket);
         }
