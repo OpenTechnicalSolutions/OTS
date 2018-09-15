@@ -11,6 +11,11 @@ namespace OpenTicketSystem.Repositories
     {
         public AppDbContext _dbContext;
 
+        public DepartmentRepository(AppDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public void Add(DepartmentModel addObject)
         {
             _dbContext.Departments.Add(addObject);
