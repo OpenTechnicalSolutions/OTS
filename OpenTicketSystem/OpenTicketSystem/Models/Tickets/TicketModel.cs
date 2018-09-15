@@ -5,11 +5,16 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models.Tickets
 {
+    public enum Status { InProgress, OnHold, InQueue, WaitingForDetails, Updated }
     public class TicketModel
     {
         public int Id { get; set; }
-        public int CustomerUserId { get; set; }
-        public int TechnicianUserId { get; set; }
+        public string CustomerUserId { get; set; }
+        public string TechnicianUserId { get; set; }
+        public Status Status { get; set; }
+
+        public int TechnicalGroupId { get; set; }
+        public int SubTechnicalGroupId { get; set; }
 
         public DateTime TimeStamp { get; set; }
         public string Subject { get; set; }
@@ -17,7 +22,7 @@ namespace OpenTicketSystem.Models.Tickets
 
         public TicketModel()
         {
-            TimeStamp = DateTime.Now;
+            
         }
     }
 }
