@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
@@ -58,17 +59,7 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult CreateUser()
         {
-            var editUserViewModel = new UserEditViewModel
-            {
-                Roles = _roleManager.Roles.ToList(),
-                TechnicalGroups = _technicalGroupRepository.GetAll().ToList(),
-                SubTechnicalGroups = _subTechnicalGroupRepository.GetAll().ToList(),
-                Departments = _departmentRepository.GetAll().ToList(),
-                Buildings = _buildingRepository.GetAll().ToList(),
-                Rooms = _roomRepository.GetAll().ToList(),
-            };
-
-            return View(editUserViewModel);
+            return View(GetViewModel());
         }
 
         [HttpPost]
@@ -76,19 +67,7 @@ namespace OpenTicketSystem.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = new AppIdentityUser()
-                {
-                    UserName = userEditViewModel.Email,
-                    Email = userEditViewModel.Email,
-                    PhoneNumber = userEditViewModel.PhoneNumber,
-                    FirstName = userEditViewModel.FirstName,
-                    LastName = userEditViewModel.LastName,
-                    DepartmentId = userEditViewModel.DepartmentId.Value,
-                    OfficeBuildingId = userEditViewModel.OfficeBuildingId.Value,
-                    OfficeRoomId = userEditViewModel.OfficeRoomId.Value,
-                    TechnicalGroupId = userEditViewModel.TechnicalGroupId.Value,
-                    SubTechnicalGroupId = userEditViewModel.SubTechnicalGroupId.Value
-                };
+                var user = userEditViewModel.IdentityUser;
 
                 var result = await _userManager.CreateAsync(user, userEditViewModel.Password);
                 if(result.Succeeded)
@@ -96,7 +75,82 @@ namespace OpenTicketSystem.Controllers
 
                 return View(userEditViewModel);
             }
-            return View();
+            return View(userEditViewModel);
         }
+
+        public async Task<IActionResult> EditUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            var vm = GetViewModel();
+            vm.IdentityUser = user;
+            if (user == null)
+                RedirectToAction("Index");
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UserEditViewModel uevm)
+        {
+            await _userManager.UpdateAsync(uevm.IdentityUser);
+            return RedirectToAction("Index");
+        }
+
+        #region Not Controllers
+        private UserEditViewModel GetViewModel()
+        {
+            var euvm = new UserEditViewModel
+            {
+                Roles = new List<SelectListItem>(),
+                TechnicalGroups = new List<SelectListItem>(),
+                SubTechnicalGroups = new List<SelectListItem>(),
+                Departments = new List<SelectListItem>(),
+                Buildings = new List<SelectListItem>(),
+                Rooms = new List<SelectListItem>()
+            };
+
+            _roleManager.Roles.ToList().ForEach(r => euvm.Roles.Add(new SelectListItem { Value = r.Id, Text = r.Name }));
+            _technicalGroupRepository.GetAll().ToList().ForEach(tg => euvm.TechnicalGroups.Add(new SelectListItem { Value = tg.Id.ToString(), Text = tg.Name }));
+            _subTechnicalGroupRepository.GetAll().ToList().ForEach(stg => euvm.SubTechnicalGroups.Add(new SelectListItem { Value = stg.Id.ToString(), Text = stg.Name }));
+            _departmentRepository.GetAll().ToList().ForEach(d => euvm.Departments.Add(new SelectListItem { Value = d.Id.ToString(), Text = d.Name }));
+            _buildingRepository.GetAll().ToList().ForEach(b => euvm.Buildings.Add(new SelectListItem { Value = b.Id.ToString(), Text = b.Name }));
+            _roomRepository.GetAll().ToList().ForEach(r => euvm.Rooms.Add(new SelectListItem { Value = r.Id.ToString(), Text = r.Name }));
+
+            return euvm;
+        }
+       /* private AppIdentityUser ViewModelToIdentityUser(UserEditViewModel uevm)
+        {
+            var user = new AppIdentityUser()
+            {
+                UserName = uevm.Email,
+                Email = uevm.Email,
+                PhoneNumber = uevm.PhoneNumber,
+                FirstName = uevm.FirstName,
+                LastName = uevm.LastName,
+                DepartmentId = uevm.DepartmentId.Value,
+                OfficeBuildingId = uevm.OfficeBuildingId.Value,
+                OfficeRoomId = uevm.OfficeRoomId.Value,
+                TechnicalGroupId = uevm.TechnicalGroupId.Value,
+                SubTechnicalGroupId = uevm.SubTechnicalGroupId.Value
+            };
+
+            return user;
+        }
+        private UserEditViewModel IdentityUserToViewModel(AppIdentityUser user)
+        {
+            var vm = GetViewModel();
+            vm.UserId = user.Id;
+            vm.Email = user.Email;
+            vm.PhoneNumber = user.PhoneNumber;
+            vm.FirstName = user.FirstName;
+            vm.LastName = user.LastName;
+            vm.DepartmentId = user.DepartmentId;
+            vm.OfficeBuildingId = user.OfficeBuildingId;
+            vm.OfficeRoomId = user.OfficeRoomId;
+            vm.TechnicalGroupId = user.TechnicalGroupId;
+            vm.SubTechnicalGroupId = user.SubTechnicalGroupId;
+
+            return vm;
+        }*/
+        #endregion
     }
 }

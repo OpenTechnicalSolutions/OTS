@@ -1,23 +1,33 @@
-﻿@model IEnumerable<UserPreviewDetailsViewModel>
-
+﻿@model IEnumerable<AppIdentityUser>
 
 @{
     ViewData["Title"] = "Users";
 }
 
-<a asp-controller="AccountAdministration" asp-action="NewUser" class="nav navbar-nav">
-    New User
-</a>
-<div class="container-fluid">
-    @foreach (var userDetails in Model)
-    {
-        <a asp-controller="AccountAdministrationController" asp-action="Details" asp-route-id="@userDetails.ProfileId">
-            <div class="row">
-                <div class="col">@userDetails.LastName</div>
-                <div class="col">@userDetails.FirstName </div>
-                <div class="col">@userDetails.Email</div>
-                <div class="col">@userDetails.PhoneNumber</div>
-            </div>
-        </a>
-    }
-</div>
+<h2>Users</h2>
+<button class="btn btn-primary" type="button" asp-action="CreateUser">New User</button>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var u in Model)
+        {
+            <tr>
+                <th scope="row">@u.Id</th>
+                <td>@u.FirstName</td>
+                <td>@u.LastName</td>
+                <td>@u.PhoneNumber</td>
+                <td>@u.Email</td>
+                <td><button class="btn btn-primary" type="Button" asp-action="EditUser">Edit</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

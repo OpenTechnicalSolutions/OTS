@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
@@ -11,13 +12,16 @@ namespace OpenTicketSystem.ViewModels
 {
     public class UserEditViewModel
     {
-        public List<IdentityRole> Roles { get; set; }
-        public List<TechnicalGroup> TechnicalGroups { get; set; }
-        public List<SubTechnicalGroup> SubTechnicalGroups { get; set; }
-        public List<DepartmentModel> Departments { get; set; }
-        public List<Building> Buildings { get; set; }
-        public List<Room> Rooms { get; set; }
+        public List<SelectListItem> Roles { get; set; }
+        public List<SelectListItem> TechnicalGroups { get; set; }
+        public List<SelectListItem> SubTechnicalGroups { get; set; }
+        public List<SelectListItem> Departments { get; set; }
+        public List<SelectListItem> Buildings { get; set; }
+        public List<SelectListItem> Rooms { get; set; }
 
+        public AppIdentityUser IdentityUser { get; set; }
+
+        public string UserId { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }

@@ -1,72 +1,65 @@
-﻿@model UserEditViewModel;
-
+﻿@model UserEditViewModel
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = "CreateUser";
 }
 
 <h2>CreateUser</h2>
 
-<form asp-controller="AccountAdministration" asp-action="CreateUser" method="post" class="form-horizontal" role="form">
+<form asp-action="CreateUser" asp-controller="AccountAdministration" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="FirstName" class="form-control"></label>
+    <div class="form-group row">
+        <label asp-for="FirstName" class="col-md-2 control-label">First Name</label>
         <div class="col-md-10">
             <input asp-for="FirstName" class="form-control"/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
-        <label asp-for="LastName" class="form-control"></label>
-        <div class="col-md-10">
-            <input asp-for="LastName" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Email" class="form-control"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="PhoneNumber" class="form-control"></label>
-        <div class="col-md-10">
-            <input asp-for="PhoneNumber" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="DepartmentId" class="form-control"></label>
-        <div class="col-md-10">
-            <select asp-for="DepartmentId" asp-items="@ViewBag.Departments"></select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="OfficeBuildingId" class="form-control"></label>
-        <div class="col-md-10">
-            <select asp-for="OfficeBuildingId" asp-items="@ViewBag.Buildings"></select>
-        </div>
-        <label asp-for="OfficeRoomId" class="form-control"></label>
+        <label asp-for="LastName" class="col-md-2 control-label">Last Name</label>
         <div>
-            <select asp-for="OfficeRoomId" asp-items="@ViewBag.Rooms"></select>
+            <input asp-for="LastName" class="form-control"/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="RoleId" class="form-control"></label>
+    <div class="form-group row">
+        <label asp-for="PhoneNumber" class="col-md-2 control-label">Phone Number</label>
         <div class="col-md-10">
-            <select asp-for="RoleId" asp-items="@AppRoleManager.Roles.Select(x => new SelectListItem { Text = x.Name, Value = x.Id }).ToList()"></select>
+            <input asp-for="PhoneNumber" class="form-control"/>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <label asp-for="Email" class="col-md-2 control-label">Email</label>
+        <div class="col-md-10">
+            <input asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="TechnicalGroupId" class="form-control"></label>
-        <div class="col-md-10">
-            <select asp-for="TechnicalGroupId" asp-items="@ViewBag.TechnicalGroup"></select>
-        </div>
-        <label asp-for="SubTechnicalGroupId" class="form-control"></label>
+    <div class="form-group row">
+        <label asp-for="DepartmentId" class="col-md-2 control-label">Department</label>
         <div>
-            <select asp-for="SubTechnicalGroupId" asp-items="@ViewBag.SubTechnicalGroup.Select(x => new SelectListItem { Text = x.Name, Value = x.Id }.ToList()"></select>
+            <select asp-for="DepartmentId" asp-items="Model.Departments"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="OfficeBuildingId" class="col-md-2 control-label">Buildings</label>
+        <div>
+            <select asp-for="OfficeBuildingId" asp-items="Model.Buildings"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="OfficeRoomId" class="col-md-2 control-label">Rooms</label>
+        <div>
+            <select class="roomIdList" asp-for="OfficeRoomId"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="TechnicalGroupId" class="col-md-2 control-label">Technical Group</label>
+        <div>
+            <select asp-for="TechnicalGroupId" asp-items="Model.TechnicalGroups"></select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="SubTechnicalGroupId" class="col-md-2 control-label">Sub Technical Group</label>
+        <div>
+            <select asp-for="SubTechnicalGroupId" asp-items="Model.SubTechnicalGroups"></select>
         </div>
     </div>
 </form>
