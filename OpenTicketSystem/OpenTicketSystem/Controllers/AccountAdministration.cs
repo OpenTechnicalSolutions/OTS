@@ -49,8 +49,8 @@ namespace OpenTicketSystem.Controllers
             var editUserViewModel = new UserEditViewModel
             {
                 Roles = _roleManager.Roles.ToList(),
-                TechnicalGroups = _dbContext.TechnicalGroups.G
-            }
+                TechnicalGroups =
+            };
 
             return View();
         }
