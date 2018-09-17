@@ -24,5 +24,6 @@ namespace OpenTicketSystem.Models
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<DepartmentModel> Departments { get; set; }
+        public DbSet<CommentModel> Comments { get; set; }
     }
 }
