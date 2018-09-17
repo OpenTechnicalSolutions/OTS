@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Repositories
+namespace OpenTicketSystem.Repositories.LocationRepositories
 {
     public class DepartmentRepository : IRepository<DepartmentModel>
     {
