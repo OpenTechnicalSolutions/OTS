@@ -12,6 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Users;
 using OpenTicketSystem.Repositories;
+using OpenTicketSystem.Repositories.LocationRepositories;
+using OpenTicketSystem.Repositories.TicketRepositories;
+using OpenTicketSystem.Repositories.UserRepositories;
 
 namespace OpenTicketSystem
 {
@@ -34,7 +37,14 @@ namespace OpenTicketSystem
 
             services.AddIdentity<AppIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
-            //services.AddTransient<ITicketRepository, TicketRepository>();
+            services.AddTransient<TicketRepository, TicketRepository>();
+            services.AddTransient<BuildingRepository, BuildingRepository>();
+            services.AddTransient<DepartmentRepository, DepartmentRepository>();
+            services.AddTransient<RoomRepository, RoomRepository>();
+            services.AddTransient<CommentRepository, CommentRepository>();
+            services.AddTransient<TechnicalGroupRepository, TechnicalGroupRepository>();
+            services.AddTransient<SubTechnicalGroupRepository, SubTechnicalGroupRepository>(); 
+
             services.AddMvc();
         }
 

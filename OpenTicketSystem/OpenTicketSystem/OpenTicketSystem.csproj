@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <Folder Include="ExtensionMethods\" />
-    <Folder Include="wwwroot\Content\" />
   </ItemGroup>
 
 </Project>

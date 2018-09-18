@@ -9,6 +9,8 @@ using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
 using OpenTicketSystem.Repositories;
+using OpenTicketSystem.Repositories.LocationRepositories;
+using OpenTicketSystem.Repositories.UserRepositories;
 using OpenTicketSystem.ViewModels;
 
 namespace OpenTicketSystem.Controllers
@@ -41,19 +43,8 @@ namespace OpenTicketSystem.Controllers
 
         public IActionResult Index()
         {
-            List<UserPreviewDetailsViewModel> userPreviewDetails = new List<UserPreviewDetailsViewModel>();
+            List<AppIdentityUser> userPreviewDetails = _userManager.Users.ToList();
 
-            foreach(var u in _userManager.Users)
-            {
-                userPreviewDetails.Add(new UserPreviewDetailsViewModel
-                {
-                    ProfileId = u.Id,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    PhoneNumber = u.PhoneNumber
-                });
-            }
             return View(userPreviewDetails);
         }
 

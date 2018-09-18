@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
-using OpenTicketSystem.Repositories;
+using OpenTicketSystem.Repositories.TicketRepositories;
 using OpenTicketSystem.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
