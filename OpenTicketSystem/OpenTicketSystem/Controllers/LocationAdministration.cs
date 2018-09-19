@@ -2,6 +2,7 @@
 using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Repositories;
+using OpenTicketSystem.Repositories.LocationRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace OpenTicketSystem.Controllers
             _departmentRepo = departmentRepo;
             _roomRepo = roomRepo;
         }
-
+        #region Departments
         public IActionResult Index()
         {
             return RedirectToAction("Departments");
@@ -65,8 +66,8 @@ namespace OpenTicketSystem.Controllers
             }
             return View(deptModel);
         }
-
-
+        #endregion
+        #region Buildings
         //Buildings
         public IActionResult Buildings()
         {
@@ -106,6 +107,8 @@ namespace OpenTicketSystem.Controllers
             }
             return View(building);
         }
+        #endregion
+        #region Rooms
 
         //Rooms
         public IActionResult Rooms(int buildingId)
@@ -113,6 +116,7 @@ namespace OpenTicketSystem.Controllers
             var rooms = _roomRepo.GetAll();
             return View(rooms);
         }
+
         public IActionResult AddRoom(int buildingId)
         {
             ViewBag.BuildingId = buildingId;
@@ -146,5 +150,6 @@ namespace OpenTicketSystem.Controllers
             }
             return View(room);
         }
+        #endregion
     }
 }
