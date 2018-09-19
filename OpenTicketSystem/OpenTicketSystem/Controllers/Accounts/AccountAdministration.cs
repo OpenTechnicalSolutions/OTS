@@ -13,7 +13,7 @@ using OpenTicketSystem.Repositories.LocationRepositories;
 using OpenTicketSystem.Repositories.UserRepositories;
 using OpenTicketSystem.ViewModels;
 
-namespace OpenTicketSystem.Controllers
+namespace OpenTicketSystem.Controllers.Accounts
 {
     public class AccountAdministration : Controller
     {
