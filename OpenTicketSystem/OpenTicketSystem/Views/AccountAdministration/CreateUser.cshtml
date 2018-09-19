@@ -2,64 +2,79 @@
 @{
     ViewData["Title"] = "CreateUser";
 }
+<div class="col-sm-12">
+    <h2>New User Setup</h2>
 
-<h2>CreateUser</h2>
+    <form asp-action="CreateUser" asp-controller="AccountAdministration" method="post" class="form-horizontal" role="form">
+        <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="CreateUser" asp-controller="AccountAdministration" method="post" class="form-horizontal" role="form">
-    <div asp-validation-summary="All" class="text-danger"></div>
-
-    <div class="form-group row">
-        <label asp-for="FirstName" class="col-md-2 control-label">First Name</label>
-        <div class="col-md-10">
-            <input asp-for="FirstName" class="form-control"/>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.FirstName" class="input-group-text control-label" id="basic-addon1">First Name</label>
+            </div>
+            <input asp-for="IdentityUser.FirstName" class="form-control"/>
             <span asp-validation-for="FirstName" class="text-danger"></span>
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.LastName" class="input-group-text control-label" id="basic-addon1">Last Name</label>
+            </div>
+            <input asp-for="IdentityUser.LastName" class="form-control"/>
+            <span asp-validation-for="LastName" class="text-danger" id="basic-addon1"></span>
         </div>
-        <label asp-for="LastName" class="col-md-2 control-label">Last Name</label>
-        <div>
-            <input asp-for="LastName" class="form-control"/>
-            <span asp-validation-for="LastName" class="text-danger"></span>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.PhoneNumber" class="input-group-text control-label" id="basic-addon1">Phone Number</label>
+            </div>
+            <input asp-for="IdentityUser.PhoneNumber" class="form-control"/>
+            <span asp-validation-for="IdentityUser.PhoneNumber" class="text-danger"></span>
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.Email" class="input-group-text control-label" id="basic-addon1">Email</label>
+            </div>
+            <input asp-for="IdentityUser.Email" class="form-control"/>
+            <span asp-validation-for="IdentityUser.Email" class="text-danger"></span>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="PhoneNumber" class="col-md-2 control-label">Phone Number</label>
-        <div class="col-md-10">
-            <input asp-for="PhoneNumber" class="form-control"/>
-            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="Password" class="input-group-text control-label" id="basic-addon1">Password</label>
+            </div>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="input-group-prepend">
+                <label asp-for="Password" class="input-group-text control-label" id="basic-addon1">Password</label>
+            </div>
+            <input class="form-control" />
         </div>
-        <label asp-for="Email" class="col-md-2 control-label">Email</label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control"/>
-            <span asp-validation-for="Email" class="text-danger"></span>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.DepartmentId" class="input-group-text control-label" for="inputGroupSelect01">Department</label>
+            </div>
+            <select asp-for="IdentityUser.DepartmentId" asp-items="Model.Departments" class="custom-select" id="inputGroupSelect01"></select>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="DepartmentId" class="col-md-2 control-label">Department</label>
-        <div>
-            <select asp-for="DepartmentId" asp-items="Model.Departments"></select>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.OfficeBuildingId" class="input-group-text control-label">Buildings</label>
+            </div>
+            <select asp-for="IdentityUser.OfficeBuildingId" asp-items="Model.Buildings" class="custom-select" id="buildingList"></select>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="OfficeBuildingId" class="col-md-2 control-label">Buildings</label>
-        <div>
-            <select asp-for="OfficeBuildingId" asp-items="Model.Buildings" class="BuildingIdList"></select>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.OfficeRoomId" class="input-group-text control-label">Rooms</label>
+            </div>
+            <select asp-for="IdentityUser.OfficeRoomId" class="custom-select" id="roomIdList"></select>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="OfficeRoomId" class="col-md-2 control-label">Rooms</label>
-        <div>
-            <select asp-for="OfficeRoomId" class="roomIdList"></select>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.TechnicalGroupId" class="input-group-text control-label">Technical Group</label>
+            </div>
+            <select asp-for="IdentityUser.TechnicalGroupId" asp-items="Model.TechnicalGroups" class="custom-select" id="TechnicalGroupIdList"></select>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="TechnicalGroupId" class="col-md-2 control-label">Technical Group</label>
-        <div>
-            <select asp-for="TechnicalGroupId" asp-items="Model.TechnicalGroups" class="TechnicalGroupIdList"></select>
+        <div class="form-group input-group mb-3">
+            <div class="input-group-prepend">
+                <label asp-for="IdentityUser.SubTechnicalGroupId" class="input-group-text control-label">Sub Technical Group</label>
+            </div>
+            <select asp-for="IdentityUser.SubTechnicalGroupId" asp-items="Model.SubTechnicalGroups" class="custom-select" id="SubTechnicalGroupIdList"></select>
         </div>
-    </div>
-    <div class="form-group row">
-        <label asp-for="SubTechnicalGroupId" class="col-md-2 control-label">Sub Technical Group</label>
-        <div>
-            <select asp-for="SubTechnicalGroupId" asp-items="Model.SubTechnicalGroups" class="SubTechnicalGroupIdList"></select>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Create"/>
         </div>
-    </div>
-</form>
+    </form>
+</div>

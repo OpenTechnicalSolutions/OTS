@@ -59,7 +59,7 @@ namespace OpenTicketSystem.Controllers
             if(ModelState.IsValid)
             {
                 var user = userEditViewModel.IdentityUser;
-
+                user.UserName = user.Email;
                 var result = await _userManager.CreateAsync(user, userEditViewModel.Password);
                 if(result.Succeeded)
                     return RedirectToAction("Index");
