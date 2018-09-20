@@ -19,21 +19,7 @@ namespace OpenTicketSystem
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    var userManager = services.GetRequiredService<UserManager<AppIdentityUser>>();
-                    DefaultAccountSeeder.Seed(userManager);
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Debug.WriteLine(e);
-                }
-            }
-                BuildWebHost(args).Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
