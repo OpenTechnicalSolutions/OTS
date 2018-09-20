@@ -43,19 +43,23 @@ namespace OpenTicketSystem
             services.AddTransient<RoomRepository, RoomRepository>();
             services.AddTransient<CommentRepository, CommentRepository>();
             services.AddTransient<TechnicalGroupRepository, TechnicalGroupRepository>();
-            services.AddTransient<SubTechnicalGroupRepository, SubTechnicalGroupRepository>(); 
+            services.AddTransient<SubTechnicalGroupRepository, SubTechnicalGroupRepository>();
 
+           
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseAuthentication();
 
+            AccountDataInitializer.SeedUsersAndRoles(userManager, roleManager);
+            
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
