@@ -16,30 +16,25 @@ namespace OpenTicketSystem
             SeedUser(userManager);
         }
 
-        public static async void SeedUser(UserManager<AppIdentityUser> userManager)
+        public static void SeedUser(UserManager<AppIdentityUser> userManager)
         {
             if (userManager.Users.Any())
                 return;
             
             var appIdUser = new AppIdentityUser { UserName = "Admin" };
 
-            var result = await userManager.CreateAsync( appIdUser, "Changeme7!");
-            if (!result.Succeeded)
-                throw new AccessViolationException("Unable to create administrative account.");
-
-            result = await userManager.AddToRoleAsync(appIdUser, "AccountManager");
-            if (!result.Succeeded)
-                throw new AccessViolationException("Unable to add AccountManager role to user.");
-
-            result = await userManager.AddToRoleAsync(appIdUser, "LocationManager");
-            if(!result.Succeeded)
-                throw new AccessViolationException("Unable to add LocationManager role to user.");
+            userManager.CreateAsync(appIdUser, "Changeme7!").Wait();
+            userManager.AddToRolesAsync(appIdUser, new string[] {
+                    "AccountManager",
+                    "LocationManager"
+            }).Wait();
         }
 
-        public async static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             if (roleManager.Roles.Any())
                 return;
+
             var roleList = new[]
             {
                 new IdentityRole("AccountManager"),
@@ -50,12 +45,8 @@ namespace OpenTicketSystem
                 new IdentityRole("Customer"),
             };
 
-            foreach(var ir in roleList)
-            {
-                var res = await roleManager.CreateAsync(ir);
-                if (!res.Succeeded)
-                    throw new AccessViolationException("Failed to create IdentityRole: " + ir.Name);
-            }
+            foreach (var ir in roleList)
+                roleManager.CreateAsync(ir).Wait();
         }
     }
 }

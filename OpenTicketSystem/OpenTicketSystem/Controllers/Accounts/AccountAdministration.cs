@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -41,19 +42,21 @@ namespace OpenTicketSystem.Controllers.Accounts
             _subTechnicalGroupRepository = subTechnicalGroupRepository;
         }
 
+        [Authorize("AccountManager")]
         public IActionResult Index()
         {
             List<AppIdentityUser> userPreviewDetails = _userManager.Users.ToList();
 
             return View(userPreviewDetails);
         }
-
+        [Authorize("AccountManager")]
         public IActionResult CreateUser()
         {
             return View(GetViewModel());
         }
 
         [HttpPost]
+        [Authorize("AccountManager")]
         public async Task<IActionResult> CreateUser(UserEditViewModel userEditViewModel)
         {
             if(ModelState.IsValid)
@@ -68,7 +71,7 @@ namespace OpenTicketSystem.Controllers.Accounts
             }
             return View(userEditViewModel);
         }
-
+        [Authorize("AccountManager")]
         public async Task<IActionResult> EditUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -80,6 +83,7 @@ namespace OpenTicketSystem.Controllers.Accounts
         }
 
         [HttpPost]
+        [Authorize("AccountManager")]
         public async Task<IActionResult> EditUser(UserEditViewModel uevm)
         {
             await _userManager.UpdateAsync(uevm.IdentityUser);
