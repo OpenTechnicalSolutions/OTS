@@ -50,7 +50,7 @@ namespace OpenTicketSystem
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -58,7 +58,7 @@ namespace OpenTicketSystem
             }
             app.UseAuthentication();
 
-            AccountDataInitializer.SeedUsersAndRoles(userManager, roleManager);
+            await AccountDataInitializer.SeedUsersAndRoles(userManager, roleManager);
             
             app.UseStatusCodePages();
             app.UseStaticFiles();
