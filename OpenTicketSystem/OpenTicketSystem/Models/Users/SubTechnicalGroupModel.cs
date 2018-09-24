@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models.Users
 {
-    public class SubTechnicalGroup
+    public class SubTechnicalGroup : TechnicalGroup
     {
-        public int Id { get; set; }
         public int TechincalGroupId { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 }

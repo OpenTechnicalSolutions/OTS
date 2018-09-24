@@ -9,7 +9,7 @@ using OpenTicketSystem.Repositories.UserRepositories;
 
 namespace OpenTicketSystem.Controllers.Accounts
 {
-    public class TechnicalGroupsController : Controller
+    public class TechnicalGroupController : Controller
     {
         private TechnicalGroupRepository _technicalGroupRepository;
         private SubTechnicalGroupRepository _subTechnicalGroupRepository;
