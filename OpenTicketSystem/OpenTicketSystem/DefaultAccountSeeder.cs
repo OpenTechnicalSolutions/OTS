@@ -39,6 +39,7 @@ namespace OpenTicketSystem
             {
                 new IdentityRole("AccountManager"),
                 new IdentityRole("LocationManager"),
+                new IdentityRole("TechnicianRoleManager"),
                 new IdentityRole("Technician"),
                 new IdentityRole("TechnicalManager"),
                 new IdentityRole("TechnicalDirectory"),
