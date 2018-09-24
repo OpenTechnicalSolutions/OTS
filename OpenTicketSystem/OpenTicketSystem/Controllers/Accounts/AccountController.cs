@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OpenTicketSystem.Models;
-using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
-using OpenTicketSystem.Repositories;
 using OpenTicketSystem.Repositories.LocationRepositories;
 using OpenTicketSystem.Repositories.UserRepositories;
 using OpenTicketSystem.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Controllers.Accounts
 {
-    public class AccountAdministration : Controller
+    public class AccountController : Controller
     {
         private SignInManager<AppIdentityUser> _signInManager;
         private UserManager<AppIdentityUser> _userManager;
@@ -28,7 +23,7 @@ namespace OpenTicketSystem.Controllers.Accounts
         private TechnicalGroupRepository _technicalGroupRepository;
         private SubTechnicalGroupRepository _subTechnicalGroupRepository;
 
-        public AccountAdministration(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, 
+        public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, 
             RoleManager<IdentityRole> roleManager, DepartmentRepository departmentRepository, RoomRepository roomRepository,
             BuildingRepository buildingRepository, TechnicalGroupRepository technicalGroupRepository, SubTechnicalGroupRepository subTechnicalGroupRepository)
         {
@@ -42,21 +37,21 @@ namespace OpenTicketSystem.Controllers.Accounts
             _subTechnicalGroupRepository = subTechnicalGroupRepository;
         }
 
-        [Authorize("AccountManager")]
+        //[Authorize("AccountManager")]
         public IActionResult Index()
         {
             List<AppIdentityUser> userPreviewDetails = _userManager.Users.ToList();
 
             return View(userPreviewDetails);
         }
-        [Authorize("AccountManager")]
+        //[Authorize("AccountManager")]
         public IActionResult CreateUser()
         {
             return View(GetViewModel());
         }
 
         [HttpPost]
-        [Authorize("AccountManager")]
+        //[Authorize("AccountManager")]
         public async Task<IActionResult> CreateUser(UserEditViewModel userEditViewModel)
         {
             if(ModelState.IsValid)
@@ -71,7 +66,7 @@ namespace OpenTicketSystem.Controllers.Accounts
             }
             return View(userEditViewModel);
         }
-        [Authorize("AccountManager")]
+        //[Authorize("AccountManager")]
         public async Task<IActionResult> EditUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -83,12 +78,20 @@ namespace OpenTicketSystem.Controllers.Accounts
         }
 
         [HttpPost]
-        [Authorize("AccountManager")]
+        //[Authorize("AccountManager")]
         public async Task<IActionResult> EditUser(UserEditViewModel uevm)
         {
             await _userManager.UpdateAsync(uevm.IdentityUser);
             return RedirectToAction("Index");
         }
+
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        /*[HttpPost]
+        public IActionResult SignIn()*/
 
         #region Not Controllers
         private UserEditViewModel GetViewModel()
