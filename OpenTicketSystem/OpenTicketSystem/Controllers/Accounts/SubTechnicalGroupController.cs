@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Models.Users;
 using OpenTicketSystem.Repositories.UserRepositories;
@@ -21,30 +22,55 @@ namespace OpenTicketSystem.Controllers.Accounts
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(int technicalId)
         {
-            return View(_subTechnicalGroupRepository.GetAll());
+            return PartialView(_subTechnicalGroupRepository.GetByTechnicalGroup(technicalId));
         }
 
-        public IActionResult SubTechnicalGroupDetails(int id)
+        public IActionResult Details(int id)
         {
             return View(_subTechnicalGroupRepository.GetById(id));
         }
 
-        public IActionResult CreateSubTechnicalGroup(int technicalGroupId)
+        public IActionResult Create(int technicalGroupId)
         {
             ViewBag.TechnicalGroupId = technicalGroupId;
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateSubTechnicalGroup(SubTechnicalGroup subTechnicalGroup)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(SubTechnicalGroup subTechnicalGroup)
         {
             if (!ModelState.IsValid)
                 return View(subTechnicalGroup);
 
             _subTechnicalGroupRepository.Add(subTechnicalGroup);
-            return RedirectToAction("TechnicalGroupDetails", "TechnicalGroup", subTechnicalGroup.TechnicalGroupId);
+            return RedirectToAction(nameof(Details), nameof(SubTechnicalGroup), subTechnicalGroup.TechnicalGroupId);
+        }
+
+        // GET: TechnicalGroup/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View(_subTechnicalGroupRepository.GetById(id));
+        }
+
+        // POST: TechnicalGroup/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection iform)
+        {
+            var technicalGroupId = _subTechnicalGroupRepository.GetById(id).TechnicalGroupId;
+            try
+            {
+                // TODO: Add delete logic here                
+                _subTechnicalGroupRepository.Delete(id);
+                return RedirectToAction(nameof(Details), nameof(TechnicalGroup), technicalGroupId);
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Details), nameof(TechnicalGroup), technicalGroupId);
+            }
         }
     }
 }
