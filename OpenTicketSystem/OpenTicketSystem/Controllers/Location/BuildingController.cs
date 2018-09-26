@@ -34,7 +34,7 @@ namespace OpenTicketSystem.Controllers.Location
         {
             return View();
         }
-
+        [HttpPost]
         public IActionResult CreateBuilding(Building building)
         {
             if (!ModelState.IsValid)
