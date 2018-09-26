@@ -1,70 +1,93 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OpenTicketSystem.Models.Locations;
-using OpenTicketSystem.Repositories.LocationRepositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace OpenTicketSystem.Controllers
+namespace OpenTicketSystem.Controllers.Location
 {
     public class RoomController : Controller
     {
-        private RoomRepository _roomRepository;
-
-        public RoomController (RoomRepository roomRepository)
+        // GET: Room
+        public ActionResult Index()
         {
-            _roomRepository = roomRepository;
-        }
-
-        public IActionResult Index()
-        {
-            return View(_roomRepository.GetAll());
-        }
-
-        public IActionResult BuildingRooms(int buildingId)
-        {
-            return View(_roomRepository.GetBuildingRooms(buildingId));
-        }
-
-        public IActionResult RoomDetails(int id)
-        {
-            return View(_roomRepository.GetById(id));
-        }
-
-        public IActionResult AddRoom(int buildingId)
-        {
-            ViewBag.BuildingId = buildingId;
             return View();
         }
+
+        // GET: Room/Details/5
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+
+        // GET: Room/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Room/Create
         [HttpPost]
-        public IActionResult AddRoom(Room room)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(IFormCollection collection)
         {
-            if (!ModelState.IsValid)
-                return View(room);
+            try
+            {
+                // TODO: Add insert logic here
 
-            _roomRepository.Add(room);
-
-            return RedirectToAction("BuildingDetails", "Building", room.BuildingId);            
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        public IActionResult EditRoom(int id)
+        // GET: Room/Edit/5
+        public ActionResult Edit(int id)
         {
-            return View(_roomRepository.GetById(id));
+            return View();
         }
 
+        // POST: Room/Edit/5
         [HttpPost]
-        public IActionResult EditRoom(Room room)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
         {
-            _roomRepository.Update(room);
-            return RedirectToAction("RoomDetails", room.Id);
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        public IActionResult DeleteRoom(int roomId)
+        // GET: Room/Delete/5
+        public ActionResult Delete(int id)
         {
-            var buildingId = _roomRepository.GetById(roomId).BuildingId;
-            _roomRepository.Delete(roomId);
-            return RedirectToAction("BuildingDetails", "Building", buildingId);
+            return View();
+        }
+
+        // POST: Room/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }

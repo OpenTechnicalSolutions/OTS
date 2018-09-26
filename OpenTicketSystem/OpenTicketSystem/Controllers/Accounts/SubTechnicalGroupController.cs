@@ -44,7 +44,7 @@ namespace OpenTicketSystem.Controllers.Accounts
                 return View(subTechnicalGroup);
 
             _subTechnicalGroupRepository.Add(subTechnicalGroup);
-            return RedirectToAction("TechnicalGroupDetails", "TechnicalGroup", subTechnicalGroup.TechincalGroupId);
+            return RedirectToAction("TechnicalGroupDetails", "TechnicalGroup", subTechnicalGroup.TechnicalGroupId);
         }
     }
 }
