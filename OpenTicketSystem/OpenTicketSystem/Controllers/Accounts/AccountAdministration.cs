@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OpenTicketSystem.Models;
-using OpenTicketSystem.Models.Tickets;
 using OpenTicketSystem.Models.Users;
-using OpenTicketSystem.Repositories;
 using OpenTicketSystem.Repositories.LocationRepositories;
 using OpenTicketSystem.Repositories.UserRepositories;
 using OpenTicketSystem.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Controllers.Accounts
 {
