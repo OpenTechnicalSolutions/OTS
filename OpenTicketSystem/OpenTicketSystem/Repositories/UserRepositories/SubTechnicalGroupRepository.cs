@@ -45,5 +45,10 @@ namespace OpenTicketSystem.Repositories.UserRepositories
         {
             _dbContext.SubTechnicalGroups.Update(obj);
         }
+
+        public IEnumerable<SubTechnicalGroup> GetByTechnicalGroup(int techGroupId)
+        {
+            return GetAll().Where(stg => stg.TechnicalGroupId == techGroupId);
+        }
     }
 }

@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a asp-controller="Ticket" asp-action="MyTickets" class="nav-link">
+                    <a asp-controller="TicketList" asp-action="MyTickets" class="nav-link">
                         Tickets
                     </a>
                 </li>
@@ -42,7 +42,8 @@
         @RenderBody()
     </div>
 
-    @RenderSection("Scripts", required:false)
+    @RenderSection("Scripts",required:false)
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="~/lib/jquery-3.3.1.slim.min/jquery-3.3.1.slim.min.js"></script>

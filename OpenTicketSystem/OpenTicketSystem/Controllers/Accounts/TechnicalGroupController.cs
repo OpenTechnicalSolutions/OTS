@@ -12,7 +12,11 @@ namespace OpenTicketSystem.Controllers.Accounts
     public class TechnicalGroupController : Controller
     {
         private TechnicalGroupRepository _technicalGroupRepository;
-        private SubTechnicalGroupRepository _subTechnicalGroupRepository;
+
+        public TechnicalGroupController(TechnicalGroupRepository technicalGroupRepository)
+        {
+            _technicalGroupRepository = technicalGroupRepository;
+        }
 
         // GET: TechnicalGroup
         public ActionResult Index()
@@ -37,9 +41,12 @@ namespace OpenTicketSystem.Controllers.Accounts
         [ValidateAntiForgeryToken]
         public ActionResult Create(TechnicalGroup technicalGroup)
         {
+            if (!ModelState.IsValid)
+                return View(technicalGroup);
+
             try
             {
-                // TODO: Add insert logic here
+                // TODO: Add insert logic here                
                 _technicalGroupRepository.Add(technicalGroup);
                 return RedirectToAction(nameof(Index));
             }

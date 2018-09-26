@@ -26,7 +26,8 @@ namespace OpenTicketSystem
             userManager.CreateAsync(appIdUser, "Changeme7!").Wait();
             userManager.AddToRolesAsync(appIdUser, new string[] {
                     "AccountManager",
-                    "LocationManager"
+                    "LocationManager",
+                    "TechnicianRoleManager"
             }).Wait();
         }
 

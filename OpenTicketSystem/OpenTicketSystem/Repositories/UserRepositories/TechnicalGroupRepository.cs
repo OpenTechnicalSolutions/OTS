@@ -19,11 +19,13 @@ namespace OpenTicketSystem.Repositories.UserRepositories
         public void Add(TechnicalGroup addObject)
         {
             _dbContext.TechnicalGroups.Add(addObject);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(TechnicalGroup deleteObject)
         {
-            _dbContext.TechnicalGroups.DefaultIfEmpty(deleteObject);
+            _dbContext.TechnicalGroups.Remove(deleteObject);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(int objId)
@@ -44,6 +46,7 @@ namespace OpenTicketSystem.Repositories.UserRepositories
         public void Update(TechnicalGroup obj)
         {
             _dbContext.TechnicalGroups.Update(obj);
+            _dbContext.SaveChanges();
         }
     }
 }
