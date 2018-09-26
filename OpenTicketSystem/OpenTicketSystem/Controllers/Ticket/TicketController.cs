@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Controllers
 {
-    public class TicketList : Controller
+    public class TicketController : Controller
     {
         private readonly TicketRepository _ticketRepository;
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
        
 
-        public TicketList(TicketRepository ticketRepository)
+        public TicketController(TicketRepository ticketRepository)
         {
             _ticketRepository = ticketRepository;
         }
