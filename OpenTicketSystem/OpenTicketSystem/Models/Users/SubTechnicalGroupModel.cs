@@ -7,6 +7,6 @@ namespace OpenTicketSystem.Models.Users
 {
     public class SubTechnicalGroup : TechnicalGroup
     {
-        public int TechincalGroupId { get; set; }
+        public int TechnicalGroupId { get; set; }
     }
 }
