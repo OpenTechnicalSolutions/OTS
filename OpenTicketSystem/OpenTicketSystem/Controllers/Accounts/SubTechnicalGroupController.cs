@@ -49,6 +49,29 @@ namespace OpenTicketSystem.Controllers.Accounts
             return RedirectToAction(nameof(Details), nameof(SubTechnicalGroup), subTechnicalGroup.TechnicalGroupId);
         }
 
+        // GET: TechnicalGroup/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View(_subTechnicalGroupRepository.GetById(id));
+        }
+
+        // POST: TechnicalGroup/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(SubTechnicalGroup subTechnicalGroup)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                _subTechnicalGroupRepository.Update(subTechnicalGroup);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(subTechnicalGroup);
+            }
+        }
+
         // GET: TechnicalGroup/Delete/5
         public ActionResult Delete(int id)
         {
