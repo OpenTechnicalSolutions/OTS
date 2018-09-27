@@ -10,7 +10,7 @@
         var viewChoice = parseInt(@ViewBag.LocationIndex);
         var urlData;
         if (viewChoice === 0) {
-            urlData = "/Department/"
+            urlData = '@Url.Action("Index", "Department")';
         } else {
             urlData = "/Building/";
         }
@@ -18,6 +18,8 @@
         $.ajax({
             type: "GET",
             url: urlData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
             success: function (viewHTML) {
                 $("#partialView").html(viewHTML);
             }
