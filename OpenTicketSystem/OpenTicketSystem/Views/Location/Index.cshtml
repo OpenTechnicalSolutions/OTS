@@ -1,7 +1,27 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Location Management";
 }
 
-<h2>Index</h2>
+<h2>Location Management</h2>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var viewChoice = parseInt(@ViewBag.LocationIndex);
+        var urlData;
+        if (viewChoice === 0) {
+            urlData = "/Department/"
+        } else {
+            urlData = "/Building/";
+        }
+
+        $.ajax({
+            type: "GET",
+            url: urlData,
+            success: function (viewHTML) {
+                $("#partialView").html(viewHTML);
+            }
+        });
+    });  
+</script>
+<div id="partialView"></div>
