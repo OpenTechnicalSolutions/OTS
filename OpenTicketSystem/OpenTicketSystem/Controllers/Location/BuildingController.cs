@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Repositories.LocationRepositories;
@@ -18,45 +19,68 @@ namespace OpenTicketSystem.Controllers.Location
         {
             _buildingRespository = buildingRepository;
         }
-
-        // GET: /<controller>/
+        // GET: /Building/
         public IActionResult Index()
         {
-            return View(_buildingRespository.GetAll());
+            return PartialView(_buildingRespository.GetAll());
         }
-
-        public IActionResult BuildingDetails(int id)
+        // GET: /Building/Details/5
+        public IActionResult Details(int id)
         {
             return View(_buildingRespository.GetById(id));
         }
-
-        public IActionResult CreateBuilding()
+        // GET: /Building/Create
+        public IActionResult Create()
         {
             return View();
         }
+        // Post: /Building/Create/<building object>
         [HttpPost]
-        public IActionResult CreateBuilding(Building building)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Building building)
         {
             if (!ModelState.IsValid)
                 return View(building);
 
             _buildingRespository.Add(building);
-            return RedirectToAction("BuildingsDetails", building.Id);
+            return RedirectToAction(nameof(Building), building.Id);
         }
-
-        public IActionResult EditBuilding(int id)
+        // GET: /Building/Edit/5
+        public IActionResult Edit(int id)
         {
             return View(_buildingRespository.GetById(id));
         }
-
+        //POST: /Building/Edit/<building object>
         [HttpPost]
-        public IActionResult EditBuilding(Building building)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Building building)
         {
             if (!ModelState.IsValid)
                 return View(building);
 
             _buildingRespository.Update(building);
-            return RedirectToAction("BuildingDetails", building.Id);
+            return RedirectToAction(nameof(Index), nameof(LocationController), LocationController.LocationIndex.Buildings);
+        }
+        // GET: TechnicalGroup/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View(_buildingRespository.GetById(id));
+        }
+        // POST: TechnicalGroup/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection iform)
+        {
+            try
+            {
+                // TODO: Add delete logic here                
+                _buildingRespository.Delete(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
     }
 }

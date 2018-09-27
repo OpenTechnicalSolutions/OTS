@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.Controllers.Location;
 using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Repositories;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Controllers
+namespace OpenTicketSystem.Controllers.Location
 {
     public class DepartmentController : Controller
     {
@@ -18,50 +19,50 @@ namespace OpenTicketSystem.Controllers
         {
             _departmentRepo = departmentRepo;
         }
-        #region Departments
+        // GET: /Department/
         public IActionResult Index()
         {
-            return RedirectToAction("Departments");
+            return PartialView(_departmentRepo.GetAll());
         }
-
-        public IActionResult Departments()
-        {
-            var departments = _departmentRepo.GetAll();
-            return View(departments);
-        }
-        public IActionResult AddDepartment()
+        // GET: /Department/Create
+        public IActionResult Create()
         {
             return View();
         }
+        // POST: /Department/Create
         [HttpPost]
-        public IActionResult AddDepartment(DepartmentModel departmentModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(DepartmentModel departmentModel)
         {
             if(ModelState.IsValid)
             {
                 _departmentRepo.Add(departmentModel);
-                return RedirectToAction("Departments");
+                return RedirectToAction(nameof(Details), departmentModel.Id);
             }
 
             return View(departmentModel);
         }
-        public IActionResult DepartmentDetails(int deptId)
+        // GET: /Department/Details/5
+        public IActionResult Details(int deptId)
         {
             return View(_departmentRepo.GetById(deptId));
         }
-        public IActionResult EditDepartment(int deptId)
+        // GET: /Department/Edit/5
+        public IActionResult Edit(int deptId)
         {
             return View(_departmentRepo.GetById(deptId));
         }
+        // POST: /Department/Edit
         [HttpPost]
-        public IActionResult EditDepartment(DepartmentModel deptModel)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(DepartmentModel deptModel)
         {
             if(ModelState.IsValid)
             {
                 _departmentRepo.Update(deptModel);
-                return RedirectToAction("Departments");
+                return RedirectToAction(nameof(Index), nameof(LocationController), LocationController.LocationIndex.Departments);
             }
             return View(deptModel);
         }
-        #endregion
     }
 }
