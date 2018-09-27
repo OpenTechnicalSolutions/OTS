@@ -10,7 +10,7 @@ namespace OpenTicketSystem.Controllers.Location
     {
         public enum LocationIndex { Departments, Buildings }
 
-        public IActionResult Index(LocationIndex li)
+        public IActionResult Index(int li)
         {
             ViewBag.LocationIndex = li;
             return View();
