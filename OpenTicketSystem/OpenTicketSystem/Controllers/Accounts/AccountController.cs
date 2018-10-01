@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using OpenTicketSystem.Models.Users;
-using OpenTicketSystem.Repositories.LocationRepositories;
-using OpenTicketSystem.Repositories.UserRepositories;
-using OpenTicketSystem.ViewModels;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.Controllers.Home;
+using OpenTicketSystem.Models.Users;
+using OpenTicketSystem.ViewModels;
 
 namespace OpenTicketSystem.Controllers.Accounts
 {
@@ -19,90 +19,145 @@ namespace OpenTicketSystem.Controllers.Accounts
 
         public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _roleManager = roleManager;
+            this._signInManager = signInManager;
+            this._userManager = userManager;
+            this._roleManager = roleManager;
         }
 
-        //[Authorize("AccountManager")]
-        public IActionResult Index()
+        // GET: AppAccount
+        public ActionResult Index()
         {
-            List<AppIdentityUser> userPreviewDetails = _userManager.Users.ToList();
-
-            return View(userPreviewDetails);
+            return PartialView(_userManager.Users.ToList());
         }
-        //[Authorize("AccountManager")]
-        public IActionResult Create()
+
+        // GET: AppAccount/Details/5
+        public ActionResult Details(string id)
+        {
+            return View(_userManager.Users.FirstOrDefault(u => u.Id == id));
+        }
+
+        // GET: AppAccount/Create
+        public ActionResult Create()
         {
             return View();
         }
 
+        // POST: AppAccount/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize("AccountManager")]
-        public async Task<IActionResult> Create(UserEditViewModel userEditViewModel)
+        public async Task<ActionResult> Create(CreateUserViewModel createUserViewModel)
         {
-            if(ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(createUserViewModel);
+
+            if(createUserViewModel.Password != createUserViewModel.Password2)
             {
-                var user = userEditViewModel.IdentityUser;
-                user.UserName = user.Email;
-                var result = await _userManager.CreateAsync(user, userEditViewModel.Password);
-                if(result.Succeeded)
-                    return RedirectToAction("Index");
-
-                return View(userEditViewModel);
+                ModelState.AddModelError("", "Passwords do not match.");
+                return View(createUserViewModel);
             }
-            return View(userEditViewModel);
-        }
-        //[Authorize("AccountManager")]
-        public async Task<IActionResult> Edit(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-           // var vm = GetViewModel();
-            //vm.IdentityUser = user;
-            if (user == null)
-                RedirectToAction("Index");
-            return View();
+
+            try
+            {
+                // TODO: Add insert logic here
+                await _userManager.CreateAsync(createUserViewModel.IdentityUser, createUserViewModel.Password);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
+        // GET: AppAccount/Edit/5
+        public ActionResult Edit(string id)
+        {
+            var user = _userManager.Users.First(u => u.Id == id);
+
+            var create = new CreateUserViewModel
+            {
+                IdentityUser = user
+            };
+
+            return View(create);
+        }
+
+        // POST: AppAccount/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize("AccountManager")]
-        public async Task<IActionResult> Edit(UserEditViewModel uevm)
+        public async Task<ActionResult> Edit(int id, CreateUserViewModel createUserViewModel)
         {
-            await _userManager.UpdateAsync(uevm.IdentityUser);
-            return RedirectToAction("Index");
+            try
+            {
+                // TODO: Add update logic here
+                await _userManager.UpdateAsync(createUserViewModel.IdentityUser);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        public IActionResult Login()
+        // GET: AppAccount/Delete/5
+        public ActionResult Delete(string id)
+        {
+            var user = _userManager.Users.First(u => u.Id == id);
+
+            var create = new CreateUserViewModel
+            {
+                IdentityUser = user
+            };
+
+            return View(create);
+        }
+
+        // POST: AppAccount/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, CreateUserViewModel createUserViewModel)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                _userManager.DeleteAsync(createUserViewModel.IdentityUser);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Login()
         {
             return View();
         }
-
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login");
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<ActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
                 return View(loginViewModel);
 
             var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
 
-            if (user != null)
+            if(user == null)
             {
-                var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
-
-                if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("","Username/Password do not match");
+                return View(loginViewModel);
             }
-            ModelState.AddModelError("","Username/Password not found.");
+
+            var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password,false, false);
+            if (result.Succeeded)
+                return RedirectToAction(nameof(Index), nameof(HomeController));
+
             return View(loginViewModel);
+        }
+        [HttpPost]
+        public async Task<ActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
         }
     }
 }
