@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Controllers.Location;
 using OpenTicketSystem.Models;
 using OpenTicketSystem.Models.Locations;
@@ -63,6 +64,28 @@ namespace OpenTicketSystem.Controllers.Location
                 return RedirectToAction(nameof(Index), nameof(LocationController), LocationController.LocationIndex.Departments);
             }
             return View(deptModel);
+        }
+         // GET: TechnicalGroup/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View(_departmentRepo.GetById(id));
+        }
+
+        // POST: TechnicalGroup/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection iform)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                _departmentRepo.Delete(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View(nameof(Index));
+            }
         }
     }
 }
