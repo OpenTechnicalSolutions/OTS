@@ -17,24 +17,11 @@ namespace OpenTicketSystem.Controllers.Accounts
         private UserManager<AppIdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
-        private DepartmentRepository _departmentRepository;
-        private RoomRepository _roomRepository;
-        private BuildingRepository _buildingRepository;
-        private TechnicalGroupRepository _technicalGroupRepository;
-        private SubTechnicalGroupRepository _subTechnicalGroupRepository;
-
-        public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, 
-            RoleManager<IdentityRole> roleManager, DepartmentRepository departmentRepository, RoomRepository roomRepository,
-            BuildingRepository buildingRepository, TechnicalGroupRepository technicalGroupRepository, SubTechnicalGroupRepository subTechnicalGroupRepository)
+        public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
-            _departmentRepository = departmentRepository;
-            _roomRepository = roomRepository;
-            _buildingRepository = buildingRepository;
-            _technicalGroupRepository = technicalGroupRepository;
-            _subTechnicalGroupRepository = subTechnicalGroupRepository;
         }
 
         //[Authorize("AccountManager")]
@@ -45,14 +32,15 @@ namespace OpenTicketSystem.Controllers.Accounts
             return View(userPreviewDetails);
         }
         //[Authorize("AccountManager")]
-        public IActionResult CreateUser()
+        public IActionResult Create()
         {
-            return View(GetViewModel());
+            return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         //[Authorize("AccountManager")]
-        public async Task<IActionResult> CreateUser(UserEditViewModel userEditViewModel)
+        public async Task<IActionResult> Create(UserEditViewModel userEditViewModel)
         {
             if(ModelState.IsValid)
             {
@@ -67,88 +55,54 @@ namespace OpenTicketSystem.Controllers.Accounts
             return View(userEditViewModel);
         }
         //[Authorize("AccountManager")]
-        public async Task<IActionResult> EditUser(string userId)
+        public async Task<IActionResult> Edit(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            var vm = GetViewModel();
-            vm.IdentityUser = user;
+           // var vm = GetViewModel();
+            //vm.IdentityUser = user;
             if (user == null)
                 RedirectToAction("Index");
-            return View(vm);
+            return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         //[Authorize("AccountManager")]
-        public async Task<IActionResult> EditUser(UserEditViewModel uevm)
+        public async Task<IActionResult> Edit(UserEditViewModel uevm)
         {
             await _userManager.UpdateAsync(uevm.IdentityUser);
             return RedirectToAction("Index");
         }
 
-        public IActionResult SignIn()
+        public IActionResult Login()
         {
             return View();
         }
 
-        /*[HttpPost]
-        public IActionResult SignIn()*/
-
-        #region Not Controllers
-        private UserEditViewModel GetViewModel()
+        public async Task<IActionResult> Logout()
         {
-            var euvm = new UserEditViewModel
-            {
-                Roles = new List<SelectListItem>(),
-                TechnicalGroups = new List<SelectListItem>(),
-                SubTechnicalGroups = new List<SelectListItem>(),
-                Departments = new List<SelectListItem>(),
-                Buildings = new List<SelectListItem>(),
-                Rooms = new List<SelectListItem>()
-            };
-
-            _roleManager.Roles.ToList().ForEach(r => euvm.Roles.Add(new SelectListItem { Value = r.Id, Text = r.Name }));
-            _technicalGroupRepository.GetAll().ToList().ForEach(tg => euvm.TechnicalGroups.Add(new SelectListItem { Value = tg.Id.ToString(), Text = tg.Name }));
-            _subTechnicalGroupRepository.GetAll().ToList().ForEach(stg => euvm.SubTechnicalGroups.Add(new SelectListItem { Value = stg.Id.ToString(), Text = stg.Name }));
-            _departmentRepository.GetAll().ToList().ForEach(d => euvm.Departments.Add(new SelectListItem { Value = d.Id.ToString(), Text = d.Name }));
-            _buildingRepository.GetAll().ToList().ForEach(b => euvm.Buildings.Add(new SelectListItem { Value = b.Id.ToString(), Text = b.Name }));
-            _roomRepository.GetAll().ToList().ForEach(r => euvm.Rooms.Add(new SelectListItem { Value = r.Id.ToString(), Text = r.Name }));
-
-            return euvm;
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login");
         }
-       /* private AppIdentityUser ViewModelToIdentityUser(UserEditViewModel uevm)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
-            var user = new AppIdentityUser()
+            if (!ModelState.IsValid)
+                return View(loginViewModel);
+
+            var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
+
+            if (user != null)
             {
-                UserName = uevm.Email,
-                Email = uevm.Email,
-                PhoneNumber = uevm.PhoneNumber,
-                FirstName = uevm.FirstName,
-                LastName = uevm.LastName,
-                DepartmentId = uevm.DepartmentId.Value,
-                OfficeBuildingId = uevm.OfficeBuildingId.Value,
-                OfficeRoomId = uevm.OfficeRoomId.Value,
-                TechnicalGroupId = uevm.TechnicalGroupId.Value,
-                SubTechnicalGroupId = uevm.SubTechnicalGroupId.Value
-            };
+                var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
 
-            return user;
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("","Username/Password not found.");
+            return View(loginViewModel);
         }
-        private UserEditViewModel IdentityUserToViewModel(AppIdentityUser user)
-        {
-            var vm = GetViewModel();
-            vm.UserId = user.Id;
-            vm.Email = user.Email;
-            vm.PhoneNumber = user.PhoneNumber;
-            vm.FirstName = user.FirstName;
-            vm.LastName = user.LastName;
-            vm.DepartmentId = user.DepartmentId;
-            vm.OfficeBuildingId = user.OfficeBuildingId;
-            vm.OfficeRoomId = user.OfficeRoomId;
-            vm.TechnicalGroupId = user.TechnicalGroupId;
-            vm.SubTechnicalGroupId = user.SubTechnicalGroupId;
-
-            return vm;
-        }*/
-        #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,10 @@ namespace OpenTicketSystem
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<AppIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+                options.LoginPath = "AppAccount/Login";
+                options.LogoutPath = "AppAccount/Logout";
+            });
             services.AddTransient<TicketRepository, TicketRepository>();
             services.AddTransient<BuildingRepository, BuildingRepository>();
             services.AddTransient<DepartmentRepository, DepartmentRepository>();
@@ -51,7 +55,6 @@ namespace OpenTicketSystem
                 app.UseDeveloperExceptionPage();
             }
             app.UseAuthentication();
-
             AccountDataInitializer.SeedUsersAndRoles(userManager, roleManager);
             
             app.UseStatusCodePages();
