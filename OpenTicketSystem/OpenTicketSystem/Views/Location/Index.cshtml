@@ -5,25 +5,8 @@
 
 <h2>Location Management</h2>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var viewChoice = parseInt(@ViewBag.LocationIndex);
-        var urlData;
-        if (viewChoice === 0) {
-            urlData = '@Url.Action("Index", "Department")';
-        } else {
-            urlData = "/Building/";
-        }
-
-        $.ajax({
-            type: "GET",
-            url: urlData,
-            contentType: "application/json; charset=utf-8",
-            dataType: "html",
-            success: function (viewHTML) {
-                $("#partialView").html(viewHTML);
-            }
-        });
-    });  
-</script>
-<div id="partialView"></div>
+@if (ViewBag.li == 0)
+{
+    <div id="departments">
+    </div>
+}
