@@ -32,8 +32,8 @@ namespace OpenTicketSystem
 
             services.AddIdentity<AppIdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
-                options.LoginPath = "AppAccount/Login";
-                options.LogoutPath = "AppAccount/Logout";
+                options.LoginPath = "Account/Login";
+                options.LogoutPath = "Account/Logout";
             });
             services.AddTransient<TicketRepository, TicketRepository>();
             services.AddTransient<BuildingRepository, BuildingRepository>();
@@ -59,8 +59,12 @@ namespace OpenTicketSystem
             
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

@@ -38,7 +38,7 @@ namespace OpenTicketSystem.Controllers.Location
             if(ModelState.IsValid)
             {
                 _departmentRepo.Add(departmentModel);
-                return RedirectToAction(nameof(Details), departmentModel.Id);
+                return RedirectToAction(nameof(Index), "Location", 0);
             }
 
             return View(departmentModel);
@@ -61,7 +61,7 @@ namespace OpenTicketSystem.Controllers.Location
             if(ModelState.IsValid)
             {
                 _departmentRepo.Update(deptModel);
-                return RedirectToAction(nameof(Index), nameof(LocationController), LocationController.LocationIndex.Departments);
+                return RedirectToAction(nameof(Index), "Location", 0);
             }
             return View(deptModel);
         }
