@@ -1,5 +1,9 @@
 ﻿<!DOCTYPE html>
 
+@inject SignInManager<AppIdentityUser> signInManager
+@inject RoleManager<IdentityRole> roleManager
+@inject UserManager<AppIdentityUser> userManager
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -41,6 +45,33 @@
                         Search
                     </a>
                 </li>
+                @{ 
+                    var userRoles = await userManager.GetRolesAsync(await userManager.GetUserAsync(User));
+                    var accMan = userRoles.Contains("AccountManager");
+                    var locMan = userRoles.Contains("LocationManager");
+                    var techRMan = userRoles.Contains("TechnicianRoleManager");
+                    if (accMan || locMan || techRMan)
+                    {
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu">
+                        @if(accMan)
+                        {
+                        <a asp-action="Index" asp-controller="AppAccount" class="dropdown-item">Account</a>
+                        }
+                        @if (locMan)
+                        {
+                        <a asp-action="Index" asp-controller="Location" class="dropdown-item">Location</a>
+                        }
+                        @if (techRMan)
+                        {
+                        <a asp-action="Index" asp-controller="TechnicalGroup" class="dropdown-item">Role</a>
+                        }
+                    </div>
+                </li>
+                    }
+                }
             </ul>
         </div>
     </nav>
