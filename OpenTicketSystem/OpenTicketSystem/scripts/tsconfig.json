@@ -7,7 +7,7 @@
     "outDir": "../wwwroot/lib/"
   },
   "files": [
-    "./app.ts"
+    "./locationLoad.ts"
   ],
   "compileOnSave": true
 }

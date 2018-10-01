@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="scripts\app.ts" />
+    <None Remove="scripts\locationLoad.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -154,7 +154,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="scripts\app.ts" />
+    <TypeScriptCompile Include="scripts\locationLoad.ts" />
   </ItemGroup>
 
 </Project>
