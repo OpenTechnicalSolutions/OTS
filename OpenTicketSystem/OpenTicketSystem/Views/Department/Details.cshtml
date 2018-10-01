@@ -1,10 +1,10 @@
 ﻿@model OpenTicketSystem.Models.Locations.DepartmentModel
 
 @{
-    ViewData["Title"] = "DepartmentDetails";
+    ViewData["Title"] = "Details";
 }
 
-<h2>DepartmentDetails</h2>
+<h2>Details</h2>
 
 <div>
     <h4>DepartmentModel</h4>
@@ -25,6 +25,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="EditDepartment" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

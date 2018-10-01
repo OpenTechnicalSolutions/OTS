@@ -275,3 +275,6 @@ __pycache__/
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180910033409_initial.Designer.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180910041451_fixRelationModel.cs
 /OpenTicketSystem/OpenTicketSystem/Migrations/20180910041451_fixRelationModel.Designer.cs
+/OpenTicketSystem/OpenTicketSystem/wwwroot/lib/bootstrap/css
+/OpenTicketSystem/OpenTicketSystem/wwwroot/lib/bootstrap/js
+/OpenTicketSystem/OpenTicketSystem/wwwroot/lib/popper.js

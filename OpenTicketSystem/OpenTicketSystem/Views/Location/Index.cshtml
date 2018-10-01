@@ -2,26 +2,11 @@
 @{
     ViewData["Title"] = "Location Management";
 }
-
+<script src="~/lib/locationCall.js" type="text/javascript"></script>
 <h2>Location Management</h2>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var viewChoice = parseInt(@ViewBag.LocationIndex);
-        var urlData;
-        if (viewChoice === 0) {
-            urlData = "/Department/"
-        } else {
-            urlData = "/Building/";
-        }
+<button class="btn btn-primary" id="departments">Departments</button>
+<button class="btn btn-primary" id="buildings">Buildings</button>
+<div id="partialView">
 
-        $.ajax({
-            type: "GET",
-            url: urlData,
-            success: function (viewHTML) {
-                $("#partialView").html(viewHTML);
-            }
-        });
-    });  
-</script>
-<div id="partialView"></div>
+</div>
