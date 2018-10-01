@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a asp-controller="Dashboard" asp-action="Index" class="nav-link">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link">
                         Dashboard
                     </a>
                 </li>
@@ -45,7 +45,8 @@
                         Search
                     </a>
                 </li>
-                @{ 
+                @if (signInManager.IsSignedIn(User))
+                {
                     var userRoles = await userManager.GetRolesAsync(await userManager.GetUserAsync(User));
                     var accMan = userRoles.Contains("AccountManager");
                     var locMan = userRoles.Contains("LocationManager");
@@ -53,26 +54,33 @@
                     if (accMan || locMan || techRMan)
                     {
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
-                    <div class="dropdown-menu">
-                        @if(accMan)
-                        {
-                        <a asp-action="Index" asp-controller="AppAccount" class="dropdown-item">Account</a>
-                        }
-                        @if (locMan)
-                        {
-                        <a asp-action="Index" asp-controller="Location" class="dropdown-item">Location</a>
-                        }
-                        @if (techRMan)
-                        {
-                        <a asp-action="Index" asp-controller="TechnicalGroup" class="dropdown-item">Role</a>
-                        }
-                    </div>
-                </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div class="dropdown-menu">
+                                @if (accMan)
+                                {
+                                    <a asp-action="Index" asp-controller="AppAccount" class="dropdown-item">Account</a>
+                                }
+                                @if (locMan)
+                                {
+                                    <a asp-action="Index" asp-controller="Location" class="dropdown-item">Location</a>
+                                }
+                                @if (techRMan)
+                                {
+                                    <a asp-action="Index" asp-controller="TechnicalGroup" class="dropdown-item">Role</a>
+                                }
+                            </div>
+                        </li>
                     }
                 }
             </ul>
+            @if (signInManager.IsSignedIn(User))
+            {
+            <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm"
+                  method="post" class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logoff</button>
+            </form>
+            }
         </div>
     </nav>
     <div>
