@@ -1,4 +1,11 @@
 ﻿$(document).ready(function () {
+    var serverData = $("#locationIndexData").data('locindex');
+    if (serverData === 'Department')
+        queryData('/Department');
+    else if (serverData === 'Building')
+        queryData('/Building');
+
+
     $('#departments').click(function () {
         console.log('Drawing Department List');
         queryData('/Department');

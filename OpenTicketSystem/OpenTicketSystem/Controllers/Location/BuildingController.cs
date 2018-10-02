@@ -22,7 +22,7 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: /Building/
         public IActionResult Index()
         {
-            return PartialView(_buildingRespository.GetAll());
+            return View(_buildingRespository.GetAll());
         }
         // GET: /Building/Details/5
         public IActionResult Details(int id)
@@ -43,7 +43,7 @@ namespace OpenTicketSystem.Controllers.Location
                 return View(building);
 
             _buildingRespository.Add(building);
-            return RedirectToAction(nameof(Building), building.Id);
+            return RedirectToAction(nameof(Index));
         }
         // GET: /Building/Edit/5
         public IActionResult Edit(int id)
@@ -59,7 +59,7 @@ namespace OpenTicketSystem.Controllers.Location
                 return View(building);
 
             _buildingRespository.Update(building);
-            return RedirectToAction(nameof(Index), "Location", 1);
+            return RedirectToAction(nameof(Index));
         }
         // GET: TechnicalGroup/Delete/5
         public ActionResult Delete(int id)

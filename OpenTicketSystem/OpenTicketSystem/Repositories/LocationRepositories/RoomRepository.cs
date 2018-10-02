@@ -45,9 +45,8 @@ namespace OpenTicketSystem.Repositories.LocationRepositories
 
         public void Update(Room obj)
         {
-            var entity = _dbContext.Rooms.FirstOrDefault(b => b.Id == obj.Id);
-            if (entity != null)
-                _dbContext.Rooms.Update(entity);
+            _dbContext.Rooms.Update(obj);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Room> GetBuildingRooms(int buildingId)

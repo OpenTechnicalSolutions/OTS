@@ -24,7 +24,7 @@ namespace OpenTicketSystem.Controllers.Location
         public IActionResult Index()
         {
             var depts = _departmentRepo.GetAll();
-            return PartialView(depts);
+            return View(depts);
         }
         // GET: /Department/Create
         public IActionResult Create()
@@ -39,7 +39,7 @@ namespace OpenTicketSystem.Controllers.Location
             if(ModelState.IsValid)
             {
                 _departmentRepo.Add(departmentModel);
-                return RedirectToAction(nameof(Index), "Location", 0);
+                return RedirectToAction(nameof(Index));
             }
 
             return View(departmentModel);
@@ -64,7 +64,7 @@ namespace OpenTicketSystem.Controllers.Location
             if(ModelState.IsValid)
             {
                 _departmentRepo.Update(deptModel);
-                return RedirectToAction(nameof(Index), "Location", 0);
+                return RedirectToAction(nameof(Index));
             }
             return View(deptModel);
         }

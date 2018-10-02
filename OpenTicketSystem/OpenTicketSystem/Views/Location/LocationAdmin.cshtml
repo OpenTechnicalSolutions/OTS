@@ -1,4 +1,4 @@
-﻿
+﻿@model LocationViewModel
 @{
     ViewData["Title"] = "Location Management";
 }
@@ -12,4 +12,4 @@
 
 </div>
 
-<div id="locationIndexData" data-name="@ViewBag.LocationIndex"></div>
+<div id="locationIndexData" data-locindex="@Model.LocationDrawData"></div>

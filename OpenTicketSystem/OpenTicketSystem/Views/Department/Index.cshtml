@@ -1,5 +1,22 @@
 ﻿@model IEnumerable<OpenTicketSystem.Models.Locations.DepartmentModel>
 
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h2>Location Management</h2>
+
+<div class="btn-group btn-group-toggle">
+    <label class="btn btn-secondary active">
+        <input type="radio" onclick="window.location.href='/Department'">Departments
+    </label>
+    <label class="btn btn-secondary">
+        <input type="radio" onclick="window.location.href='/Building'">Buildings
+    </label>
+</div>
+
+<h2>Departments</h2>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -16,20 +33,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
