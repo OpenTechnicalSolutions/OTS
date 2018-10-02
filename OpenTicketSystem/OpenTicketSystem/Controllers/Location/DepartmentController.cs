@@ -23,7 +23,8 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: /Department/
         public IActionResult Index()
         {
-            return PartialView(_departmentRepo.GetAll());
+            var depts = _departmentRepo.GetAll();
+            return PartialView(depts);
         }
         // GET: /Department/Create
         public IActionResult Create()
@@ -44,14 +45,16 @@ namespace OpenTicketSystem.Controllers.Location
             return View(departmentModel);
         }
         // GET: /Department/Details/5
-        public IActionResult Details(int deptId)
+        public IActionResult Details(int Id)
         {
-            return View(_departmentRepo.GetById(deptId));
+            var dept = _departmentRepo.GetById(Id);
+            return View(dept);
         }
         // GET: /Department/Edit/5
-        public IActionResult Edit(int deptId)
+        public IActionResult Edit(int Id)
         {
-            return View(_departmentRepo.GetById(deptId));
+            var dept = _departmentRepo.GetById(Id);
+            return View(dept);
         }
         // POST: /Department/Edit
         [HttpPost]

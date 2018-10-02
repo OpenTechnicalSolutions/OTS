@@ -8,11 +8,9 @@ namespace OpenTicketSystem.Controllers.Location
 {
     public class LocationController : Controller
     {
-        public enum LocationIndex { Departments, Buildings }
-
-        public IActionResult Index(int li)
+        public IActionResult LocationAdmin(int id)
         {
-            ViewBag.LocationIndex = li;
+            ViewBag.LocationIndex = id;
             return View();
         }
     }
