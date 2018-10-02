@@ -59,7 +59,7 @@ namespace OpenTicketSystem.Controllers.Location
                 return View(building);
 
             _buildingRespository.Update(building);
-            return RedirectToAction(nameof(Index), nameof(LocationController), LocationController.LocationIndex.Buildings);
+            return RedirectToAction(nameof(Index), "Location", 1);
         }
         // GET: TechnicalGroup/Delete/5
         public ActionResult Delete(int id)

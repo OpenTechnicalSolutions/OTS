@@ -19,15 +19,15 @@ namespace OpenTicketSystem.Controllers.Accounts
 
         public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            this._signInManager = signInManager;
-            this._userManager = userManager;
-            this._roleManager = roleManager;
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: AppAccount
         public ActionResult Index()
         {
-            return PartialView(_userManager.Users.ToList());
+            return View(_userManager.Users.ToList());
         }
 
         // GET: AppAccount/Details/5
@@ -149,7 +149,7 @@ namespace OpenTicketSystem.Controllers.Accounts
 
             var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password,false, false);
             if (result.Succeeded)
-                return RedirectToAction(nameof(Index), nameof(HomeController));
+                return RedirectToAction(nameof(Index), "Home");
 
             return View(loginViewModel);
         }
