@@ -13,11 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180921011159_updateRoles.cs" />
-    <Compile Remove="Migrations\20180921011159_updateRoles.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="scripts\BuildingDetails.ts" />
   </ItemGroup>
 

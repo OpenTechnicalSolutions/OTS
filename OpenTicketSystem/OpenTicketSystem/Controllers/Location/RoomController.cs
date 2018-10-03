@@ -28,7 +28,8 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var room = _roomRepository.GetById(id);
+            return View(room);
         }
 
         // GET: Room/Create
@@ -56,7 +57,8 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var room = _roomRepository.GetById(id);
+            return View(room);
         }
 
         // POST: Room/Edit/5
