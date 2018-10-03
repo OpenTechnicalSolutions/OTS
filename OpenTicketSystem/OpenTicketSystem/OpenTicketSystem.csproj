@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="scripts\BuildingDetails.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="node_modules\%40types\jquery\package.json" />
     <Content Include="node_modules\acorn\package.json" />
     <Content Include="node_modules\amdefine\package.json" />
@@ -5859,6 +5863,7 @@
     <TypeScriptCompile Include="node_modules\mixin-deep\node_modules\is-extendable\index.d.ts" />
     <TypeScriptCompile Include="node_modules\popper.js\index.d.ts" />
     <TypeScriptCompile Include="node_modules\safe-buffer\index.d.ts" />
+    <TypeScriptCompile Include="scripts\BuildingDetails.ts" />
   </ItemGroup>
 
   <ItemGroup>
