@@ -1,4 +1,4 @@
-﻿@model OpenTicketSystem.Models.Locations.Room
+﻿@model Room
 
 @{
     ViewData["Title"] = "Create";
@@ -13,9 +13,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BuildingId" class="control-label"></label>
-                <input asp-for="BuildingId" class="form-control" id="buildingId"/>
-                <span asp-validation-for="BuildingId" class="text-danger"></span>
+                <label asp-for="BuildingNumber" class="control-label"></label>
+                <input asp-for="BuildingNumber" class="form-control" id="BuildingNumber" value="@ViewBag.BuildingId"/>
+                <span asp-validation-for="BuildingNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PrimaryContactUsername" class="control-label">Primary Contact Username</label>
@@ -23,7 +23,7 @@
                 <span asp-validation-for="PrimaryContactUsername" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
+                <label asp-for="Name" class="control-label">Room Number</label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
@@ -44,5 +44,5 @@
 </div>
 
 <script>
-    document.getElementById('buildingId').disabled = true;
+    ///document.getElementById('buildingId').disabled = true;
 </script>

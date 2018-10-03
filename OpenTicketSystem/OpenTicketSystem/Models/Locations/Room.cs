@@ -9,7 +9,7 @@ namespace OpenTicketSystem.Models.Locations
     public class Room : Location
     {
         [Required]
-        public int BuildingId { get; set; }
+        public int BuildingNumber { get; set; }
 
         [Required]
         public string PrimaryContactUsername { get; set; }
