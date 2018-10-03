@@ -20,11 +20,7 @@ namespace OpenTicketSystem.Repositories.LocationRepositories
         public void Add(Room addObject)
         {
             _dbContext.Rooms.Add(addObject);
-            _dbContext.Database.OpenConnection();
-            _dbContext.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Rooms ON");
             _dbContext.SaveChanges();
-            _dbContext.Database.ExecuteSqlCommand("SET IDENTITY_INSERT dbo.Rooms OFF");
-            _dbContext.Database.CloseConnection();
         }
 
         public void Delete(Room deleteObject)
