@@ -14,11 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="BuildingId" class="control-label"></label>
-                <input asp-for="BuildingId" class="form-control" />
+                <input asp-for="BuildingId" class="form-control" id="buildingId"/>
                 <span asp-validation-for="BuildingId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PrimaryContactUsername" class="control-label"></label>
+                <label asp-for="PrimaryContactUsername" class="control-label">Primary Contact Username</label>
                 <input asp-for="PrimaryContactUsername" class="form-control" />
                 <span asp-validation-for="PrimaryContactUsername" class="text-danger"></span>
             </div>
@@ -40,6 +40,9 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Building" asp-action="Details">Back to List</a>
 </div>
 
+<script>
+    document.getElementById('buildingId').disabled = true;
+</script>

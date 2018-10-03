@@ -1,28 +1,28 @@
-﻿@model IEnumerable<OpenTicketSystem.Models.Locations.Room>
+﻿@model BuildingRoomsViewModel;
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-id="@Model.BuildingNumber">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingId)
+                @Html.DisplayNameFor(model => model.Rooms[0].BuildingId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrimaryContactUsername)
+                @Html.DisplayNameFor(model => model.Rooms[0].PrimaryContactUsername)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Rooms[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Rooms[0].Description)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Rooms) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingId)
