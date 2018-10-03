@@ -45,9 +45,8 @@ namespace OpenTicketSystem.Repositories.LocationRepositories
 
         public void Update(DepartmentModel obj)
         {
-            var entity = _dbContext.Departments.FirstOrDefault(b => b.Id == obj.Id);
-            if (entity != null)
-                _dbContext.Departments.Update(entity);
+                _dbContext.Departments.Update(obj);
+                _dbContext.SaveChanges();
         }
     }
 }

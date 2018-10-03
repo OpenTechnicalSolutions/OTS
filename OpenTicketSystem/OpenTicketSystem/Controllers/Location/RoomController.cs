@@ -4,11 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.Repositories.LocationRepositories;
 
 namespace OpenTicketSystem.Controllers.Location
 {
     public class RoomController : Controller
     {
+        private RoomRepository _roomRepository;
+
+        public RoomController(RoomRepository roomRepository)
+        {
+            _roomRepository = roomRepository;
+        }
+
         // GET: Room
         public ActionResult Index()
         {
@@ -88,6 +96,12 @@ namespace OpenTicketSystem.Controllers.Location
             {
                 return View();
             }
+        }
+
+        public IActionResult BuildingRooms(int id)
+        {
+            var rooms = _roomRepository.GetBuildingRooms(id);
+            return PartialView(rooms);
         }
     }
 }

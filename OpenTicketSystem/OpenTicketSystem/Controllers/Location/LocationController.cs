@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OpenTicketSystem.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,13 @@ namespace OpenTicketSystem.Controllers.Location
 {
     public class LocationController : Controller
     {
-        public enum LocationIndex { Departments, Buildings }
-
-        public IActionResult Index(int li)
+        public IActionResult LocationAdmin(int id)
         {
-            ViewBag.LocationIndex = li;
-            return View();
+            var locIndex = new LocationViewModel
+            {
+                LocationDrawData = (LocationDrawData)id
+            };
+            return View(locIndex);
         }
     }
 }

@@ -13,13 +13,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/scripts/lib/bootstrap.css">
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script src="~/lib/popper.js/popper.min.js"></script>
-    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/scripts/lib/jquery.js"></script>
+    <script src="~/scripts/lib/popper.js"></script>
+    <script src="~/scripts/lib/bootstrap.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -63,7 +63,7 @@
                                 }
                                 @if (locMan)
                                 {
-                                    <a asp-action="Index" asp-controller="Location" class="dropdown-item">Location</a>
+                                    <a asp-action="Index" asp-controller="Department" class="dropdown-item">Location</a>
                                 }
                                 @if (techRMan)
                                 {
@@ -84,10 +84,10 @@
         </div>
     </nav>
     <div>
-        @RenderBody();
+        @RenderBody()
     </div>
 
 
-    @RenderSection("Scripts", required: false);
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

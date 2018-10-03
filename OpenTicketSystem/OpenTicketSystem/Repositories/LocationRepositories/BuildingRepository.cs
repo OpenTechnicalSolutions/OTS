@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace OpenTicketSystem.Repositories.LocationRepositories
 {
@@ -45,9 +46,9 @@ namespace OpenTicketSystem.Repositories.LocationRepositories
 
         public void Update(Building obj)
         {
-            var entity = _dbContext.Buildings.FirstOrDefault(b => b.Id == obj.Id);
-            if (entity != null)
-                _dbContext.Buildings.Update(entity);
+            _dbContext.Buildings.Update(obj);
+            _dbContext.SaveChanges();
+            
         }
     }
 }
