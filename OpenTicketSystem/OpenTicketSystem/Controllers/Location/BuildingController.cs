@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Repositories.LocationRepositories;
+using OpenTicketSystem.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,10 +15,12 @@ namespace OpenTicketSystem.Controllers.Location
     public class BuildingController : Controller
     {
         private BuildingRepository _buildingRespository;
+        private RoomRepository _roomRepository;
 
-        public BuildingController(BuildingRepository buildingRepository)
+        public BuildingController(BuildingRepository buildingRepository, RoomRepository roomRepository)
         {
             _buildingRespository = buildingRepository;
+            _roomRepository = roomRepository;
         }
         // GET: /Building/
         public IActionResult Index()
@@ -27,7 +30,18 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: /Building/Details/5
         public IActionResult Details(int id)
         {
-            return View(_buildingRespository.GetById(id));
+            var rooms = new BuildingRoomsViewModel()
+            {
+                BuildingNumber = id,
+                Rooms = _roomRepository.GetBuildingRooms(id).ToList()
+            };
+
+            var buildingDetails = new BuildingDetailsViewModel()
+            {
+                Building = _buildingRespository.GetById(id),
+                Rooms = rooms
+            };
+            return View(buildingDetails);
         }
         // GET: /Building/Create
         public IActionResult Create()

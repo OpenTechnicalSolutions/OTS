@@ -34,9 +34,8 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Create
         public ActionResult Create(int id)
         {
-            var room = new Room();
-            room.BuildingId = id;
-            return View(room);
+            ViewBag.BuildingId = id;
+            return View();
         }
 
         // POST: Room/Create
@@ -47,16 +46,12 @@ namespace OpenTicketSystem.Controllers.Location
             if (!ModelState.IsValid)
                 return View(room);
 
-            try
-            {
-                // TODO: Add insert logic here
-                _roomRepository.Add(room);
-                return RedirectToAction(nameof(Details), "Building", room.BuildingId);
-            }
-            catch
-            {
-                return View();
-            }
+            if (room == null)
+                return NotFound();
+
+            // TODO: Add insert logic here
+            _roomRepository.Add(room);
+            return RedirectToAction(nameof(Details), "Building", room.BuildingNumber);
         }
 
         // GET: Room/Edit/5
