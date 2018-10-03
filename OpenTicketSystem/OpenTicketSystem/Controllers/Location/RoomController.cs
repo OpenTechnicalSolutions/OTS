@@ -32,9 +32,8 @@ namespace OpenTicketSystem.Controllers.Location
         }
 
         // GET: Room/Create
-        public ActionResult Create(int id)
+        public ActionResult Create(int BuildingNumber)
         {
-            ViewBag.BuildingId = id;
             return View();
         }
 
@@ -51,7 +50,7 @@ namespace OpenTicketSystem.Controllers.Location
 
             // TODO: Add insert logic here
             _roomRepository.Add(room);
-            return RedirectToAction(nameof(Details), "Building", room.BuildingNumber);
+            return RedirectToAction(nameof(Details), "Building", new { Id = room.BuildingNumber });
         }
 
         // GET: Room/Edit/5

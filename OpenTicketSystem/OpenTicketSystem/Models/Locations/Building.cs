@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models.Locations
 {
-    public class Building : Location
+    public class Building
     {
-
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }
