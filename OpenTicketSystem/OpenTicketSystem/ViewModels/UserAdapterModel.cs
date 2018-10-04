@@ -1,9 +1,10 @@
-﻿using System;
+﻿using OpenTicketSystem.Models.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenTicketSystem.Models.Users
+namespace OpenTicketSystem.ViewModels
 {
     public class UserAdapterModel
     {
@@ -21,6 +22,8 @@ namespace OpenTicketSystem.Models.Users
         public int? OfficeRoomId { get => _identityUser.OfficeRoomId.Value; set => _identityUser.OfficeRoomId = value; }
         public int? TechnicalGroupId { get => _identityUser.TechnicalGroupId.Value; set => _identityUser.TechnicalGroupId = value; }
         public int? SubTechnicalGroupId { get => _identityUser.SubTechnicalGroupId.Value; set => _identityUser.SubTechnicalGroupId = value; }
+        public string Password1 { get; set; }
+        public string Password2 { get; set; }
 
     }
 }

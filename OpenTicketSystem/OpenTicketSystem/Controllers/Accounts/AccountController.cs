@@ -45,12 +45,12 @@ namespace OpenTicketSystem.Controllers.Accounts
         // POST: AppAccount/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(CreateUserViewModel createUserViewModel)
+        public async Task<ActionResult> Create(UserAdapterModel createUserViewModel)
         {
             if (!ModelState.IsValid)
                 return View(createUserViewModel);
 
-            if(createUserViewModel.Password != createUserViewModel.Password2)
+            if(createUserViewModel.Password1 != createUserViewModel.Password2)
             {
                 ModelState.AddModelError("", "Passwords do not match.");
                 return View(createUserViewModel);
@@ -59,7 +59,7 @@ namespace OpenTicketSystem.Controllers.Accounts
             try
             {
                 // TODO: Add insert logic here
-                await _userManager.CreateAsync(createUserViewModel.IdentityUser, createUserViewModel.Password);
+                await _userManager.CreateAsync(createUserViewModel._identityUser, createUserViewModel.Password1);
                 return RedirectToAction(nameof(Index));
             }
             catch

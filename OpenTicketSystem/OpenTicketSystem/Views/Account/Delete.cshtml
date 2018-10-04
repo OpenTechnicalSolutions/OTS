@@ -1,4 +1,4 @@
-﻿@model OpenTicketSystem.Models.Users.UserAdapterModel
+﻿@model OpenTicketSystem.ViewModels.UserAdapterModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -70,6 +70,18 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SubTechnicalGroupId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Password1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Password2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Password2)
         </dd>
     </dl>
     

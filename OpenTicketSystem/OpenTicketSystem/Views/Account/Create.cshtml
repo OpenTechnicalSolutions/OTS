@@ -1,4 +1,4 @@
-﻿@model OpenTicketSystem.Models.Users.UserAdapterModel
+﻿@model OpenTicketSystem.ViewModels.UserAdapterModel
 
 @{
     ViewData["Title"] = "Create";
@@ -61,6 +61,16 @@
                 <label asp-for="SubTechnicalGroupId" class="control-label"></label>
                 <input asp-for="SubTechnicalGroupId" class="form-control" />
                 <span asp-validation-for="SubTechnicalGroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password1" class="control-label"></label>
+                <input asp-for="Password1" class="form-control" />
+                <span asp-validation-for="Password1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password2" class="control-label"></label>
+                <input asp-for="Password2" class="form-control" />
+                <span asp-validation-for="Password2" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
