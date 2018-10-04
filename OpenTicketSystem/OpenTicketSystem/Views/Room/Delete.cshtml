@@ -39,6 +39,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="BuildingNumber"/>
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-controller="Building" asp-action="Details" asp-route-id="@Model.BuildingNumber">Back to List</a>
     </form>
