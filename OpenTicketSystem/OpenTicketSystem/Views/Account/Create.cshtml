@@ -1,80 +1,78 @@
-﻿@model UserEditViewModel
+﻿@model OpenTicketSystem.Models.Users.UserAdapterModel
+
 @{
-    ViewData["Title"] = "CreateUser";
+    ViewData["Title"] = "Create";
 }
-<div class="col-sm-12">
-    <h2>New User Setup</h2>
 
-    <form asp-action="CreateUser" asp-controller="AccountAdministration" method="post" class="form-horizontal" role="form">
-        <div asp-validation-summary="All" class="text-danger"></div>
+<h2>Create</h2>
 
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.FirstName" class="input-group-text control-label" id="basic-addon1">First Name</label>
+<h4>UserAdapterModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-            <input asp-for="IdentityUser.FirstName" class="form-control"/>
-            <span asp-validation-for="FirstName" class="text-danger"></span>
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.LastName" class="input-group-text control-label" id="basic-addon1">Last Name</label>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <input asp-for="IdentityUser.LastName" class="form-control"/>
-            <span asp-validation-for="LastName" class="text-danger" id="basic-addon1"></span>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.PhoneNumber" class="input-group-text control-label" id="basic-addon1">Phone Number</label>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
-            <input asp-for="IdentityUser.PhoneNumber" class="form-control"/>
-            <span asp-validation-for="IdentityUser.PhoneNumber" class="text-danger"></span>
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.Email" class="input-group-text control-label" id="basic-addon1">Email</label>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <input asp-for="IdentityUser.Email" class="form-control"/>
-            <span asp-validation-for="IdentityUser.Email" class="text-danger"></span>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="Password" class="input-group-text control-label" id="basic-addon1">Password</label>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-            <div class="input-group-prepend">
-                <label asp-for="Password" class="input-group-text control-label" id="basic-addon1">Password</label>
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                <input asp-for="DepartmentId" class="form-control" />
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
-            <input class="form-control" />
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.DepartmentId" class="input-group-text control-label" for="inputGroupSelect01">Department</label>
+            <div class="form-group">
+                <label asp-for="OfficeBuildingId" class="control-label"></label>
+                <input asp-for="OfficeBuildingId" class="form-control" />
+                <span asp-validation-for="OfficeBuildingId" class="text-danger"></span>
             </div>
-            <select asp-for="IdentityUser.DepartmentId" asp-items="Model.Departments" class="custom-select" id="inputGroupSelect01"></select>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.OfficeBuildingId" class="input-group-text control-label">Buildings</label>
+            <div class="form-group">
+                <label asp-for="OfficeRoomId" class="control-label"></label>
+                <input asp-for="OfficeRoomId" class="form-control" />
+                <span asp-validation-for="OfficeRoomId" class="text-danger"></span>
             </div>
-            <select asp-for="IdentityUser.OfficeBuildingId" asp-items="Model.Buildings" class="custom-select" id="buildingList"></select>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.OfficeRoomId" class="input-group-text control-label">Rooms</label>
+            <div class="form-group">
+                <label asp-for="TechnicalGroupId" class="control-label"></label>
+                <input asp-for="TechnicalGroupId" class="form-control" />
+                <span asp-validation-for="TechnicalGroupId" class="text-danger"></span>
             </div>
-            <select asp-for="IdentityUser.OfficeRoomId" class="custom-select" id="roomIdList"></select>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.TechnicalGroupId" class="input-group-text control-label">Technical Group</label>
+            <div class="form-group">
+                <label asp-for="SubTechnicalGroupId" class="control-label"></label>
+                <input asp-for="SubTechnicalGroupId" class="form-control" />
+                <span asp-validation-for="SubTechnicalGroupId" class="text-danger"></span>
             </div>
-            <select asp-for="IdentityUser.TechnicalGroupId" asp-items="Model.TechnicalGroups" class="custom-select" id="TechnicalGroupIdList"></select>
-        </div>
-        <div class="form-group input-group mb-3">
-            <div class="input-group-prepend">
-                <label asp-for="IdentityUser.SubTechnicalGroupId" class="input-group-text control-label">Sub Technical Group</label>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
-            <select asp-for="IdentityUser.SubTechnicalGroupId" asp-items="Model.SubTechnicalGroups" class="custom-select" id="SubTechnicalGroupIdList"></select>
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Create"/>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
