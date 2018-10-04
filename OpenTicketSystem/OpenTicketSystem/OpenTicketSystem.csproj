@@ -7,14 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Views\AppAccount\**" />
+    <Compile Remove="Views\Location\**" />
     <Content Remove="Views\AppAccount\**" />
+    <Content Remove="Views\Location\**" />
     <EmbeddedResource Remove="Views\AppAccount\**" />
+    <EmbeddedResource Remove="Views\Location\**" />
     <None Remove="Views\AppAccount\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20180921011159_updateRoles.cs" />
-    <Compile Remove="Migrations\20180921011159_updateRoles.Designer.cs" />
+    <None Remove="Views\Location\**" />
   </ItemGroup>
 
   <ItemGroup>

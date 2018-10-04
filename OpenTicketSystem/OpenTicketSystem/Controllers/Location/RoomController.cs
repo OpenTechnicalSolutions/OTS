@@ -28,12 +28,14 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var room = _roomRepository.GetById(id);
+            return View(room);
         }
 
         // GET: Room/Create
         public ActionResult Create(int BuildingNumber)
         {
+            ViewBag.BuildingNumber = BuildingNumber;
             return View();
         }
 
@@ -56,7 +58,8 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var room = _roomRepository.GetById(id);
+            return View(room);
         }
 
         // POST: Room/Edit/5
@@ -71,7 +74,7 @@ namespace OpenTicketSystem.Controllers.Location
             {
                 // TODO: Add update logic here
                 _roomRepository.Update(room);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Details), "Building", new { Id = room.BuildingNumber });
             }
             catch
             {
@@ -82,19 +85,20 @@ namespace OpenTicketSystem.Controllers.Location
         // GET: Room/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var room = _roomRepository.GetById(id);
+            return View(room);
         }
 
         // POST: Room/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Room room)
         {
             try
             {
                 // TODO: Add delete logic here
-                _roomRepository.Delete(id);
-                return RedirectToAction(nameof(Index));
+                _roomRepository.Delete(room);
+                return RedirectToAction(nameof(Details), "Building", new { Id = room.BuildingNumber });
             }
             catch
             {

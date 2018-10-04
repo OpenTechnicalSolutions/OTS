@@ -1,35 +1,89 @@
-﻿@model IEnumerable<AppIdentityUser>
+﻿@model IEnumerable<OpenTicketSystem.Models.Users.UserAdapterModel>
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Index";
 }
 
-<h2>Users</h2>
-<a asp-action="CreateUser" class="btn btn-primary">
-    New User
-</a>
-<table class="table table-hover">
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
     <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Email</th>
-            <th scope="col"></th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfficeBuildingId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OfficeRoomId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TechnicalGroupId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTechnicalGroupId)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var u in Model)
-        {
-            <tr>
-                <th scope="row">@u.Id</th>
-                <td>@u.FirstName</td>
-                <td>@u.LastName</td>
-                <td>@u.PhoneNumber</td>
-                <td>@u.Email</td>
-                <td><button class="btn btn-primary" type="Button" asp-action="EditUser">Edit</button></td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficeBuildingId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OfficeRoomId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TechnicalGroupId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubTechnicalGroupId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
     </tbody>
 </table>
