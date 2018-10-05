@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="scripts\AccountPageBehavior.ts" />
     <None Remove="scripts\BuildingDetails.ts" />
   </ItemGroup>
 
@@ -5863,6 +5864,7 @@
     <TypeScriptCompile Include="node_modules\popper.js\index.d.ts" />
     <TypeScriptCompile Include="node_modules\safe-buffer\index.d.ts" />
     <TypeScriptCompile Include="scripts\BuildingDetails.ts" />
+    <TypeScriptCompile Include="scripts\AccountPageBehavior.ts" />
   </ItemGroup>
 
   <ItemGroup>
