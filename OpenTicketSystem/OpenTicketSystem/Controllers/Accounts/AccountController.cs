@@ -27,13 +27,19 @@ namespace OpenTicketSystem.Controllers.Accounts
         // GET: AppAccount
         public ActionResult Index()
         {
-            return View(_userManager.Users.ToList());
+            var adapterList = new List<UserAdapterModel>();
+            var userList = _userManager.Users.ToList();
+            foreach(var user in userList)           
+                adapterList.Add(new UserAdapterModel(user));            
+            return View(adapterList);
         }
 
         // GET: AppAccount/Details/5
         public ActionResult Details(string id)
         {
-            return View(_userManager.Users.FirstOrDefault(u => u.Id == id));
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
+            var adapter = new UserAdapterModel(user);
+            return View(adapter);
         }
 
         // GET: AppAccount/Create
@@ -58,7 +64,6 @@ namespace OpenTicketSystem.Controllers.Accounts
 
             try
             {
-                // TODO: Add insert logic here
                 await _userManager.CreateAsync(createUserViewModel._identityUser, createUserViewModel.Password1);
                 return RedirectToAction(nameof(Index));
             }
@@ -71,25 +76,20 @@ namespace OpenTicketSystem.Controllers.Accounts
         // GET: AppAccount/Edit/5
         public ActionResult Edit(string id)
         {
-            var user = _userManager.Users.First(u => u.Id == id);
-
-            var create = new CreateUserViewModel
-            {
-                IdentityUser = user
-            };
-
-            return View(create);
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
+            var adapter = new UserAdapterModel(user);
+            
+            return View(user);
         }
 
         // POST: AppAccount/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, CreateUserViewModel createUserViewModel)
+        public async Task<ActionResult> Edit(int id, UserAdapterModel createUserViewModel)
         {
             try
             {
-                // TODO: Add update logic here
-                await _userManager.UpdateAsync(createUserViewModel.IdentityUser);
+                await _userManager.UpdateAsync(createUserViewModel._identityUser);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -102,24 +102,21 @@ namespace OpenTicketSystem.Controllers.Accounts
         public ActionResult Delete(string id)
         {
             var user = _userManager.Users.First(u => u.Id == id);
-
-            var create = new CreateUserViewModel
-            {
-                IdentityUser = user
-            };
-
-            return View(create);
+            var adapter = new UserAdapterModel(user);
+            
+            return View(adapter);
         }
 
         // POST: AppAccount/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, CreateUserViewModel createUserViewModel)
+        public ActionResult Delete(string UserId, IFormCollection fc)
         {
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == UserId);
             try
             {
                 // TODO: Add delete logic here
-                _userManager.DeleteAsync(createUserViewModel.IdentityUser);
+                _userManager.DeleteAsync(user);
                 return RedirectToAction(nameof(Index));
             }
             catch

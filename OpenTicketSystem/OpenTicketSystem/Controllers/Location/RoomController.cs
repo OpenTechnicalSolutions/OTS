@@ -113,5 +113,10 @@ namespace OpenTicketSystem.Controllers.Location
             buildingRooms.BuildingNumber = id;
             return PartialView(buildingRooms);
         }
+
+        public IActionResult RoomData()
+        {
+            return Json(_roomRepository.GetAll());
+        }
     }
 }

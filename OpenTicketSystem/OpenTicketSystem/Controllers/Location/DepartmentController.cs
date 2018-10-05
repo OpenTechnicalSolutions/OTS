@@ -90,5 +90,10 @@ namespace OpenTicketSystem.Controllers.Location
                 return View(nameof(Index));
             }
         }
+
+        public IActionResult DepartmentData()
+        {
+            return Json(_departmentRepo.GetAll());
+        }
     }
 }
