@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     var techStatus = $("#techStatus").data("techStat");
     $.ajax({
         url: "/Department/DepartmentData",
