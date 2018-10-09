@@ -114,9 +114,9 @@ namespace OpenTicketSystem.Controllers.Location
             return PartialView(buildingRooms);
         }
 
-        public IActionResult RoomData()
+        public IActionResult RoomData(int buildingid)
         {
-            return Json(_roomRepository.GetAll());
+            return Json(_roomRepository.GetBuildingRooms(buildingid));
         }
     }
 }
