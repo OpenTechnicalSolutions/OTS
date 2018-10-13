@@ -3,7 +3,21 @@
 @{
     ViewData["Title"] = "Create";
 }
-w
+
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using System.Linq
+
+@{ 
+    var deptList = new List<SelectListItem> { new SelectListItem() };
+    Model.Departments.ForEach(sel => deptList.Add(new SelectListItem(sel.Name, sel.Id.ToString())));
+
+    var buildList = new List<SelectListItem> { new SelectListItem() };
+    Model.Buildings.ForEach(sel => buildList.Add(new SelectListItem(sel.Name, sel.Id.ToString())));
+
+    var techList = new List<SelectListItem> { new SelectListItem() };
+    Model.TechnicalGroups.ForEach(sel => techList.Add(new SelectListItem(sel.Name, sel.Id.ToString())));
+}
+
 <script src="~/scripts/AccountPageBehavior.js"></script>
 <h2>Create</h2>
 
@@ -50,12 +64,12 @@ w
             </div>
             <div class="form-group">
                 <label asp-for="DepartmentId" class="control-label">Department</label>
-                <select asp-for="DepartmentId" class="form-control" id="deptdd"><option>lol</option><option>lul</option></select>
+                <select asp-for="DepartmentId" class="form-control" id="deptdd" asp-items="@deptList"></select>
                 <span asp-validation-for="DepartmentId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="OfficeBuildingId" class="control-label">Building</label>
-                <select asp-for="OfficeBuildingId" class="form-control" id="buildingdd"></select>
+                <select asp-for="OfficeBuildingId" class="form-control" id="buildingdd" asp-items="@buildList"></select>
                 <span asp-validation-for="OfficeBuildingId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -65,7 +79,7 @@ w
             </div>
             <div class="form-group technical-group">
                 <label asp-for="TechnicalGroupId" class="control-label">Technical Group</label>
-                <select asp-for="TechnicalGroupId" class="form-control" id="techgroupdd"></select>
+                <select asp-for="TechnicalGroupId" class="form-control" id="techgroupdd" asp-items="techList"></select>
                 <span asp-validation-for="TechnicalGroupId" class="text-danger"></span>
             </div>
             <div class="form-group technical-group">

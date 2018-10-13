@@ -101,5 +101,10 @@ namespace OpenTicketSystem.Controllers.Accounts
                 return View(nameof(Index));
             }
         }
+
+        public IActionResult TechnicalGroupData()
+        {
+            return Json(_technicalGroupRepository.GetAll());
+        }
     }
 }

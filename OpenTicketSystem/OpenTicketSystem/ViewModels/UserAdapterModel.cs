@@ -1,4 +1,5 @@
-﻿using OpenTicketSystem.Models.Users;
+﻿using OpenTicketSystem.Models.Locations;
+using OpenTicketSystem.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,8 +11,6 @@ namespace OpenTicketSystem.ViewModels
     public class UserAdapterModel
     {
         public AppIdentityUser _identityUser;
-
-        public int Id { get; set; }
         public string UserId { get => _identityUser.Id; }
         [Required]
         [StringLength(100,ErrorMessage = "User name is required.")]
@@ -55,5 +54,11 @@ namespace OpenTicketSystem.ViewModels
         {
             _identityUser = identityUser;
         }
+
+        public List<DepartmentModel> Departments { get; set; }
+        public List<Building> Buildings { get; set; }
+        public List<Room> Rooms { get; set; }
+        public List<TechnicalGroup> TechnicalGroups { get; set; }
+        public List<SubTechnicalGroup> SubTechnicalGroups { get; set; }
     }
 }

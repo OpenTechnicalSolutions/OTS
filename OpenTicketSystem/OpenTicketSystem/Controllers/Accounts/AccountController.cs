@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OpenTicketSystem.Controllers.Home;
+using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Models.Users;
+using OpenTicketSystem.Repositories.LocationRepositories;
+using OpenTicketSystem.Repositories.UserRepositories;
 using OpenTicketSystem.ViewModels;
 
 namespace OpenTicketSystem.Controllers.Accounts
@@ -16,12 +19,26 @@ namespace OpenTicketSystem.Controllers.Accounts
         private SignInManager<AppIdentityUser> _signInManager;
         private UserManager<AppIdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
+        private DepartmentRepository _departmentRepository;
+        private BuildingRepository _buildingRepository;
+        private TechnicalGroupRepository _technicalGroupRepository;
+        private RoomRepository _roomRepository;
+        private SubTechnicalGroupRepository _subTechnicalGroupRepository;
 
-        public AccountController(SignInManager<AppIdentityUser> signInManager, UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(SignInManager<AppIdentityUser> signInManager, 
+            UserManager<AppIdentityUser> userManager, RoleManager<IdentityRole> roleManager, 
+            DepartmentRepository departmentRepository, BuildingRepository buildingRepository,
+            TechnicalGroupRepository technicalGroupRepository, RoomRepository roomRepository, 
+            SubTechnicalGroupRepository subTechnicalGroupRepository)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _roleManager = roleManager;
+            _departmentRepository = departmentRepository;
+            _buildingRepository = buildingRepository;
+            _technicalGroupRepository = technicalGroupRepository;
+            _roomRepository = roomRepository;
+            _subTechnicalGroupRepository = subTechnicalGroupRepository;
         }
 
         // GET: AppAccount
@@ -39,32 +56,41 @@ namespace OpenTicketSystem.Controllers.Accounts
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
             var adapter = new UserAdapterModel(user);
+            adapter.Departments = new List<DepartmentModel> { _departmentRepository.GetById(user.DepartmentId.Value) };
+            adapter.Buildings = new List<Building> { _buildingRepository.GetById(user.OfficeBuildingId.Value) };
+            adapter.Rooms = new List<Room> { _roomRepository.GetById(user.OfficeRoomId.Value) };
+            adapter.TechnicalGroups = new List<TechnicalGroup> { _technicalGroupRepository.GetById(user.TechnicalGroupId.Value) };
+            adapter.SubTechnicalGroups = new List<SubTechnicalGroup> { _subTechnicalGroupRepository.GetById(user.SubTechnicalGroupId.Value) };
             return View(adapter);
         }
 
         // GET: AppAccount/Create
         public ActionResult Create()
         {
-            return View();
+            var adapter = new UserAdapterModel(new AppIdentityUser());
+            adapter.Departments = _departmentRepository.GetAll().ToList();
+            adapter.Buildings = _buildingRepository.GetAll().ToList();
+            adapter.TechnicalGroups = _technicalGroupRepository.GetAll().ToList();
+            return View(adapter);
         }
 
         // POST: AppAccount/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UserAdapterModel createUserViewModel)
+        public async Task<ActionResult> Create(UserAdapterModel adapter)
         {
             if (!ModelState.IsValid)
-                return View(createUserViewModel);
+                return View(adapter);
 
-            if(createUserViewModel.Password1 != createUserViewModel.Password2)
+            if(adapter.Password1 != adapter.Password2)
             {
                 ModelState.AddModelError("", "Passwords do not match.");
-                return View(createUserViewModel);
+                return View(adapter);
             }
 
             try
             {
-                await _userManager.CreateAsync(createUserViewModel._identityUser, createUserViewModel.Password1);
+                await _userManager.CreateAsync(adapter._identityUser, adapter.Password1);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -85,7 +111,7 @@ namespace OpenTicketSystem.Controllers.Accounts
         // POST: AppAccount/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(int id, UserAdapterModel createUserViewModel)
+        public async Task<ActionResult> Edit(UserAdapterModel createUserViewModel)
         {
             try
             {

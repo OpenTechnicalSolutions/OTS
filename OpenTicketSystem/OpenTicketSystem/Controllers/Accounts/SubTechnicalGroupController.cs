@@ -95,5 +95,10 @@ namespace OpenTicketSystem.Controllers.Accounts
                 return RedirectToAction(nameof(Details), nameof(TechnicalGroup), technicalGroupId);
             }
         }
+
+        public IActionResult SubTechnicalGroupData(int techgroupid)
+        {
+            return Json(_subTechnicalGroupRepository.GetByTechnicalGroup(techgroupid));
+        }
     }
 }

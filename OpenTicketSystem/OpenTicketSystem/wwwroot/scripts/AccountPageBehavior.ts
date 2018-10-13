@@ -1,25 +1,11 @@
 $(document).ready(function () {
     var techStatus = $("#techStatus").data("techStat");
-    $.getJSON(
-        "/Department/DepartmentData",
-        function (result) {
-            DrawDropDown(result, "deptdd");
-        });
-
-    $.getJSON(
-        "/Building/BuildingData",
-        function (result) {
-            DrawDropDown(result, "buildingdd");
-        });
-
+ 
     $("#buildingdd").change(function () {
-        var url = "/Room/RoomData?buildingid=" + $("#buildingdd option:selected").val;
-        $.getJSON(
-            "/Room/RoomData?buildingid=",
-            function (result) {
-                DrawDropDown(result, "roomdd");
-            });
-    });
+        var buildingid = document.getElementById("buildingdd") as HTMLSelectElement;
+        var url = "/Room/RoomData?buildingid=" + (buildingid.selectedOptions.item(0) as HTMLOptionElement).value;
+        QueryJson(url, "roomdd");
+    });      
 
     $.getJSON(
         "/TechnicalGroup/TechnicalGroupData",
@@ -28,13 +14,21 @@ $(document).ready(function () {
         });
 
     $("#techgroupdd").change(function () { 
-    $.getJSON(
-        "/TechnicalGroup/TechnicalGroupData",
-        function (result) {
-            DrawDropDown(result, "subtechgroupdd");
+        $.getJSON(
+            "/SubTechnicalGroup/SubTechnicalGroupData",
+            function (result) {
+                DrawDropDown(result, "subtechgroupdd");
             });
     });
 });
+
+function QueryJson(url: string, htmlId: string) {
+    $.getJSON(
+        url,
+        function (result) {
+            DrawDropDown(result, htmlId);
+        });
+}
 
 function DrawDropDown(drawData: [object], selectId) {
     var html = "";
