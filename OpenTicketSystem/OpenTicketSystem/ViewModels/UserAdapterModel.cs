@@ -48,7 +48,9 @@ namespace OpenTicketSystem.ViewModels
         public string Password2 { get; set; }
 
         public UserAdapterModel()
-        { }
+        {
+            _identityUser = new AppIdentityUser();
+        }
 
         public UserAdapterModel(AppIdentityUser identityUser)
         {

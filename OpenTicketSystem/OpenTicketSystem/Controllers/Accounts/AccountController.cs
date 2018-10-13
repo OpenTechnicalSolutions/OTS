@@ -90,8 +90,11 @@ namespace OpenTicketSystem.Controllers.Accounts
 
             try
             {
-                await _userManager.CreateAsync(adapter._identityUser, adapter.Password1);
-                return RedirectToAction(nameof(Index));
+                var result = await _userManager.CreateAsync(adapter._identityUser, adapter.Password1);
+                if (result.Succeeded)
+                    return RedirectToAction(nameof(Index));
+                else
+                    return View(adapter);
             }
             catch
             {
