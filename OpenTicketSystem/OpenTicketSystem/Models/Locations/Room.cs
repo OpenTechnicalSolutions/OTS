@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models.Locations
 {
-    public class Room
+    public class Room : ISelectOptionModel
     {
         [Key]
         public int Id { get; set; }

@@ -56,11 +56,23 @@ namespace OpenTicketSystem.Controllers.Accounts
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == id);
             var adapter = new UserAdapterModel(user);
-            adapter.Departments = new List<DepartmentModel> { _departmentRepository.GetById(user.DepartmentId.Value) };
-            adapter.Buildings = new List<Building> { _buildingRepository.GetById(user.OfficeBuildingId.Value) };
-            adapter.Rooms = new List<Room> { _roomRepository.GetById(user.OfficeRoomId.Value) };
-            adapter.TechnicalGroups = new List<TechnicalGroup> { _technicalGroupRepository.GetById(user.TechnicalGroupId.Value) };
-            adapter.SubTechnicalGroups = new List<SubTechnicalGroup> { _subTechnicalGroupRepository.GetById(user.SubTechnicalGroupId.Value) };
+            
+            if(user.DepartmentId.HasValue)
+                adapter.Departments = new List<DepartmentModel> { _departmentRepository.GetById(user.DepartmentId.Value) };
+
+            if (user.OfficeBuildingId.HasValue)
+            {
+                adapter.Buildings = new List<Building> { _buildingRepository.GetById(user.OfficeBuildingId.Value) };
+                if(user.OfficeRoomId.HasValue)
+                    adapter.Rooms = new List<Room> { _roomRepository.GetById(user.OfficeRoomId.Value) };
+            }
+            if (user.TechnicalGroupId.HasValue)
+            {
+                adapter.TechnicalGroups = new List<TechnicalGroup> { _technicalGroupRepository.GetById(user.TechnicalGroupId.Value) };
+                if (user.SubTechnicalGroupId.HasValue)
+                    adapter.SubTechnicalGroups = new List<SubTechnicalGroup> { _subTechnicalGroupRepository.GetById(user.SubTechnicalGroupId.Value) };
+            }
+
             return View(adapter);
         }
 
@@ -184,6 +196,11 @@ namespace OpenTicketSystem.Controllers.Accounts
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
+        }
+
+        public IActionResult RoleData()
+        {
+            return View(_roleManager.Roles.Select(r => r.Name).ToList());
         }
     }
 }

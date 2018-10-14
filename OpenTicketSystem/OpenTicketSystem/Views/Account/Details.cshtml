@@ -58,18 +58,24 @@
         <dd>
             @Html.DisplayFor(model => model.OfficeRoomId)
         </dd>
+        @if (Model.TechnicalGroups != null)
+        {
         <dt>
             @Html.DisplayNameFor(model => model.TechnicalGroupId)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.TechnicalGroupId)
         </dd>
+            @if (Model.SubTechnicalGroups != null)
+            {
         <dt>
             @Html.DisplayNameFor(model => model.SubTechnicalGroupId)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.SubTechnicalGroupId)
         </dd>
+            }
+        }
     </dl>
 </div>
 <div>
