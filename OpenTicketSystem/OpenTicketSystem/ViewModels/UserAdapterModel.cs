@@ -35,7 +35,7 @@ namespace OpenTicketSystem.ViewModels
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "The phone number is not entered in a correct format")]
         public string PhoneNumber { get => _identityUser.PhoneNumber; set => _identityUser.PhoneNumber = value; }
-        public List<string> Roles { get; set; }
+        public string Roles { get; set; }
         public int? DepartmentId { get => _identityUser.DepartmentId; set => _identityUser.DepartmentId = value; }
         public int? OfficeBuildingId { get => _identityUser.OfficeBuildingId; set => _identityUser.OfficeBuildingId = value; }
         public int? OfficeRoomId { get => _identityUser.OfficeRoomId; set => _identityUser.OfficeRoomId = value; }

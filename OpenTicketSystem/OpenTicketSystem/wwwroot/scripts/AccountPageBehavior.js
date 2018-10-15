@@ -1,22 +1,19 @@
 $(document).ready(function () {
     ///Adds roles
+    var rolesused = new Array();
     $("#add-role-button").click(function () {
         var selectedrole = document.getElementById("roleSelector").selectedOptions[0];
         if (selectedrole.value === "")
             return;
-        var tableobj = document.getElementById("role-table");
+        var listobj = document.getElementById("added-roles");
         ///new TR data
-        var newTr = document.createElement("TR");
-        newTr.setAttribute("id", selectedrole.value + "-row");
-        newTr.setAttribute("value", selectedrole.value + "-row");
+        var newli = document.createElement("LI");
+        newli.textContent = selectedrole.value;
         ///new TD data
-        var newTd = document.createElement("TD");
-        newTd.innerHTML = selectedrole.value;
-        newTd.setAttribute("id", selectedrole.value + "-cell");
-        newTd.setAttribute("value", selectedrole.value + "-cell");
-        newTr.appendChild(newTd);
-        var addTr = document.getElementById("add-role-row");
-        tableobj.insertBefore(newTr, addTr);
+        listobj.appendChild(newli);
+        rolesused[rolesused.length] = selectedrole.value;
+        var input = document.getElementById("user-role-data");
+        input.value = JSON.stringify(rolesused);
     });
     $("#buildingdd").change(function () {
         var buildingid = document.getElementById("buildingdd");

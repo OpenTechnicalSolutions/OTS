@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using OpenTicketSystem.Controllers.Home;
 using OpenTicketSystem.Models.Locations;
 using OpenTicketSystem.Models.Users;
@@ -100,18 +101,18 @@ namespace OpenTicketSystem.Controllers.Accounts
                 return View(adapter);
             }
 
-            try
+            var result = await _userManager.CreateAsync(adapter._identityUser, adapter.Password1);
+            if (!result.Succeeded)
+                return View(adapter);
+
+            var roles = JsonConvert.DeserializeObject<string[]>(adapter.Roles);
+
+            foreach (var r in roles)
             {
-                var result = await _userManager.CreateAsync(adapter._identityUser, adapter.Password1);
-                if (result.Succeeded)
-                    return RedirectToAction(nameof(Index));
-                else
-                    return View(adapter);
+                var actualUser = _userManager.Users.FirstOrDefault(u => u.UserName == adapter._identityUser.UserName);
+                result = await _userManager.AddToRoleAsync(actualUser, r);
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AppAccount/Edit/5
@@ -128,15 +129,11 @@ namespace OpenTicketSystem.Controllers.Accounts
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(UserAdapterModel createUserViewModel)
         {
-            try
-            {
-                await _userManager.UpdateAsync(createUserViewModel._identityUser);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            if (!ModelState.IsValid)
+                return View(createUserViewModel);
+
+            await _userManager.UpdateAsync(createUserViewModel._identityUser);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: AppAccount/Delete/5

@@ -69,27 +69,30 @@
             </div>
             <div class="form-group">
                <!-- <script>var roles = @roles;</script>-->
-                <input type="hidden" asp-for="Roles" class="userRoleData" />
-                <table class="table" id="role-table">
-                    <tr class="table-header" id="role-header">
-                        <th>Role</th>
-                        <th></th>
-                    </tr>
-                    <tr class="add-role-row">
-                        <td>
-                            <select class="form-control" id="roleSelector">
+                
+                <div class="table" id="role-table">
+                    <div class="table-header" id="role-header">
+                        <div>Roles</div>
+                    </div>
+                    <div>
+                        <input type="hidden" asp-for="Roles" id="user-role-data" />
+                        <ul id="added-roles"></ul>
+                    </div>
+                    <div class="add-role-row">
+                        <div>
+                            <select name="roleSelector" class="form-control" id="roleSelector">
                                 <option></option>
                                 @foreach (var r in roles)
                                 {
                                     <option value=@r>@r</option>
                                 }
                             </select>
-                        </td>
-                        <td>
+                        </div>
+                        <div>
                             <button type="button" class="btn-secondary" id="add-role-button">Add Role</button>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="DepartmentId" class="control-label">Department</label>
