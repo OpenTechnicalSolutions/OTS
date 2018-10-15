@@ -13,7 +13,6 @@ namespace OpenTicketSystem.Controllers.Accounts
 {
     public class SubTechnicalGroupController : Controller
     {
-
         private SubTechnicalGroupRepository _subTechnicalGroupRepository;
 
         public SubTechnicalGroupController(SubTechnicalGroupRepository subTechnicalGroupRepository)
