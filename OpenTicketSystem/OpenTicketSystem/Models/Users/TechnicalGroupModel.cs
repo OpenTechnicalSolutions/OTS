@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OpenTicketSystem.Models.Users
 {
-    public class TechnicalGroup
+    public class TechnicalGroup : ISelectOptionModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

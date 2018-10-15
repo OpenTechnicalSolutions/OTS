@@ -1,8 +1,11 @@
-﻿@model OpenTicketSystem.Models.Users.UserAdapterModel
+﻿@model OpenTicketSystem.ViewModels.UserAdapterModel
 
 @{
     ViewData["Title"] = "Delete";
 }
+
+@inject RoleManager<IdentityRole> _roleManager
+@inject UserManager<AppIdentityUser> _userManager
 
 <h2>Delete</h2>
 
@@ -42,39 +45,54 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DepartmentId)
+            Department
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DepartmentId)
+            <div class="departmentInfo" data-deptId="@Model.DepartmentId"></div>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.OfficeBuildingId)
+            Building Information
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.OfficeBuildingId)
+            <div class="buildingInfo" data-buildingId="@Model.OfficeBuildingId"></div>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.OfficeRoomId)
+            Room Number
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.OfficeRoomId)
+            <div class="roomInfo" data-roomNum="@Model.OfficeRoomId"></div>
+        </dd>
+        @{ 
+            string[] roles =
+            {
+                    "Technician",
+                    "TechnicalManager",
+                    "TechnicalDirector"
+            };
+
+            var uroles = _userManager.GetRolesAsync(Model._identityUser);
+            bool tech = false;
+            foreach (var r in roles) { tech = roles.Contains(r); if (tech) { break; } }
+            if(tech){
+
+        <dt>
+            Technical Group
+        </dt>
+        <dd>
+            <div class="technicalGroupInfo" data-techId="@Model.TechnicalGroupId"></div>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.TechnicalGroupId)
+            Team
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.TechnicalGroupId)
+            <div class="subTechnicalGroupInfo" data-stechId="@Model.SubTechnicalGroupId"></div>
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SubTechnicalGroupId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SubTechnicalGroupId)
-        </dd>
+            }
+        }
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="UserId" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -13,7 +13,6 @@ namespace OpenTicketSystem.Controllers.Accounts
 {
     public class SubTechnicalGroupController : Controller
     {
-
         private SubTechnicalGroupRepository _subTechnicalGroupRepository;
 
         public SubTechnicalGroupController(SubTechnicalGroupRepository subTechnicalGroupRepository)
@@ -94,6 +93,11 @@ namespace OpenTicketSystem.Controllers.Accounts
             {
                 return RedirectToAction(nameof(Details), nameof(TechnicalGroup), technicalGroupId);
             }
+        }
+
+        public IActionResult SubTechnicalGroupData(int techgroupid)
+        {
+            return Json(_subTechnicalGroupRepository.GetByTechnicalGroup(techgroupid));
         }
     }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="scripts\AccountPageBehavior.ts" />
     <None Remove="scripts\BuildingDetails.ts" />
   </ItemGroup>
 
@@ -702,6 +703,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -5863,6 +5865,7 @@
     <TypeScriptCompile Include="node_modules\popper.js\index.d.ts" />
     <TypeScriptCompile Include="node_modules\safe-buffer\index.d.ts" />
     <TypeScriptCompile Include="scripts\BuildingDetails.ts" />
+    <TypeScriptCompile Include="scripts\AccountPageBehavior.ts" />
   </ItemGroup>
 
   <ItemGroup>

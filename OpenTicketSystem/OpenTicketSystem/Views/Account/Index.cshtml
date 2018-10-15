@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OpenTicketSystem.Models.Users.UserAdapterModel>
+﻿@model IEnumerable<UserAdapterModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -27,21 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DepartmentId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OfficeBuildingId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OfficeRoomId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TechnicalGroupId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubTechnicalGroupId)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -64,24 +49,9 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartmentId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OfficeBuildingId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OfficeRoomId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TechnicalGroupId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubTechnicalGroupId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
             </td>
         </tr>
 }
